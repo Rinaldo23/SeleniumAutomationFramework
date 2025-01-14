@@ -5,6 +5,7 @@
     <test name="LoginPageTests">
         <classes>
             <class name="com.rdb.tests.LoginPageTests"/>
+            <class name="com.rdb.tests.HomePageTests"/>
         </classes>
     </test>
 </suite>
