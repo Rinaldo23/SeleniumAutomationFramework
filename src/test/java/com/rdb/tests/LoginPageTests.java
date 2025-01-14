@@ -24,18 +24,4 @@ public final class LoginPageTests extends BaseTest {
         Thread.sleep(10000);
         Assert.assertEquals(DriverManager.getDriver().getTitle(), "Playwright - Google Search");
     }
-
-    @Test
-    public void testOne1() throws InterruptedException {
-        DriverManager.getDriver().findElement(By.name("q")).sendKeys("Selenium", Keys.ENTER);
-        Thread.sleep(10000);
-        Assert.assertEquals(DriverManager.getDriver().getTitle(), "Selenium - Google Search");
-    }
-
-    @Test
-    public void testTwo1() throws InterruptedException {
-        DriverManager.getDriver().findElement(By.name("q")).sendKeys("Playwright", Keys.ENTER);
-        Thread.sleep(10000);
-        Assert.assertEquals(DriverManager.getDriver().getTitle(), "Playwright - Google Search");
-    }
 }

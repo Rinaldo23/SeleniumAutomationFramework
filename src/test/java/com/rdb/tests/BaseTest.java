@@ -10,7 +10,7 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    public void setUp() {
+    public void setUp() throws Exception {
         Driver.initDriver();
     }
 

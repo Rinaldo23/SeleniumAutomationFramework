@@ -13,7 +13,6 @@ public final class HomePageTests extends BaseTest {
 
     @Test
     public void testThree() throws InterruptedException {
-//        Driver.initDriver();
         DriverManager.getDriver().findElement(By.name("q")).sendKeys("Selenium", Keys.ENTER);
         Thread.sleep(10000);
         Assert.assertEquals(DriverManager.getDriver().getTitle(), "Selenium - Google Search");
@@ -21,24 +20,10 @@ public final class HomePageTests extends BaseTest {
 
     @Test
     public void testFour() throws InterruptedException {
-//        Driver.initDriver();
         DriverManager.getDriver().findElement(By.name("q")).sendKeys("Playwright", Keys.ENTER);
         Thread.sleep(10000);
         Assert.assertEquals(DriverManager.getDriver().getTitle(), "Playwright - Google Search");
     }
 
-    @Test
-    public void testOne2() throws InterruptedException {
-        DriverManager.getDriver().findElement(By.name("q")).sendKeys("Selenium", Keys.ENTER);
-        Thread.sleep(10000);
-        Assert.assertEquals(DriverManager.getDriver().getTitle(), "Selenium - Google Search");
-    }
-
-    @Test
-    public void testTwo2() throws InterruptedException {
-        DriverManager.getDriver().findElement(By.name("q")).sendKeys("Playwright", Keys.ENTER);
-        Thread.sleep(10000);
-        Assert.assertEquals(DriverManager.getDriver().getTitle(), "Playwright - Google Search");
-    }
 
 }
