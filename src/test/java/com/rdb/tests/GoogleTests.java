@@ -1,14 +1,13 @@
 package com.rdb.tests;
 
 import com.rdb.driver.DriverManager;
+import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
-import java.util.Objects;
 
 public class GoogleTests extends BaseTest {
 
@@ -23,21 +22,30 @@ public class GoogleTests extends BaseTest {
 
         String pageTitle = DriverManager.getDriver().getTitle();
 
-        Assert.assertTrue(Objects.nonNull(pageTitle), "Page title is null");
+        Assertions.assertThat(pageTitle)
+                .as("Page title is null!").isNotNull()
+                .as("Page title doesn't contain google search!").containsIgnoringCase("google search")
+                .as("Size is not between the given range!").hasSizeBetween(5, 50);
+
+        /*Assert.assertTrue(Objects.nonNull(pageTitle), "Page title is null");
         Assert.assertTrue(pageTitle.toLowerCase().contains("google search"), "Page title doesn't contain google search!");
         Assert.assertTrue(pageTitle.length() > 5);
-        Assert.assertTrue(pageTitle.length() < 100);
+        Assert.assertTrue(pageTitle.length() < 100);*/
 
         List<WebElement> listOfElements = DriverManager.getDriver().findElements(By.xpath("//h3"));
-        boolean isElementPresent = false;
+        Assertions.assertThat(listOfElements)
+                .hasSize(16)
+                .extracting(WebElement::getText)
+                .contains("Selenium");
+
+        /*boolean isElementPresent = false;
         for (WebElement element : listOfElements) {
             if (element.getText().equalsIgnoreCase("Selenium")) {
                 isElementPresent = true;
                 break;
             }
         }
-
-        Assert.assertTrue(isElementPresent, "Element is not present!!!");
+        Assert.assertTrue(isElementPresent, "Element is not present!!!");*/
 
     }
 
