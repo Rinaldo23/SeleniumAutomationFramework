@@ -1,5 +1,7 @@
 package com.rdb.utils;
 
+import com.rdb.constants.FrameworkConstants;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -15,7 +17,7 @@ public final class ReadPropertyFile {
     // Eager Initialization
     static {
         try {
-            FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "/src/test/resources/Config/config.properties");
+            FileInputStream fis = new FileInputStream(FrameworkConstants.getConfigFilePath());
             prop.load(fis);
 
             for (Map.Entry<Object, Object> entry : prop.entrySet()) {

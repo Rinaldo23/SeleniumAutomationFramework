@@ -1,12 +1,11 @@
 package com.rdb.driver;
 
+import com.rdb.constants.FrameworkConstants;
 import com.rdb.utils.ReadPropertyFile;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 import java.util.Objects;
-
-import static com.rdb.constants.FrameworkConstants.getChromeDriverPath;
 
 public final class Driver {
 
@@ -15,7 +14,7 @@ public final class Driver {
 
     public static void initDriver() throws Exception {
         if (Objects.isNull(DriverManager.getDriver())) {
-            System.setProperty("webdriver.chrome.driver", getChromeDriverPath());
+            System.setProperty("webdriver.chrome.driver", FrameworkConstants.getChromeDriverPath());
 
 //            WebDriver driver = new ChromeDriver();
 //            DriverManager.setDriver(driver);
