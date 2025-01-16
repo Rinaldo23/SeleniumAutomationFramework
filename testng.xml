@@ -4,7 +4,8 @@
 
     <test name="LoginPageTests" parallel="methods" thread-count="3">
         <classes>
-            <class name="com.rdb.tests.GoogleTests"/>
+            <class name="com.rdb.tests.OrangeHRMTests"/>
+            <!--            <class name="com.rdb.tests.GoogleTests"/>-->
             <!--            <class name="com.rdb.tests.LoginPageTests"/>-->
             <!--            <class name="com.rdb.tests.HomePageTests"/>-->
         </classes>
