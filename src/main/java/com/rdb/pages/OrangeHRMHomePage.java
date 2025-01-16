@@ -18,21 +18,23 @@ public final class OrangeHRMHomePage {
 
     // Methods
 
-    public void clickDropdownMenu() {
+    public OrangeHRMHomePage clickDropdownMenu() {
         DriverManager.getDriver().findElement(drpdownUserMenu).click();
+        return this;
     }
 
-    public void clickFromMenuoptions(String option) {
+    public OrangeHRMLoginPage clickFromMenuoptions(String option) {
         WebElement element = DriverManager.getDriver().findElement(By.xpath(menuItems.replace("%value%", option)));
         new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(element))
                 .click();
         Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(3));
+        return new OrangeHRMLoginPage();
     }
     /*new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10))
             .until(driver -> driver.findElement(By.xpath(menuItems.replace("%value%", option))).isEnabled());*/   // Java 8+
 
-    public String getTitle() {
+    public String getHomePageTitle() {
         return DriverManager.getDriver().getTitle();
     }
 }

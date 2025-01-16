@@ -2,8 +2,9 @@ package com.rdb.tests;
 
 import com.rdb.pages.OrangeHRMHomePage;
 import com.rdb.pages.OrangeHRMLoginPage;
-import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrangeHRMTests extends BaseTest {
 
@@ -13,24 +14,23 @@ public class OrangeHRMTests extends BaseTest {
     @Test
     public void loginTest() {
 
-        OrangeHRMLoginPage ohlp = new OrangeHRMLoginPage();
-        ohlp.enterUsername("Admin");
-        ohlp.enterPassword("admin123");
-        ohlp.clickLogin();
+        String homePageTitle = new OrangeHRMLoginPage()
+                .enterUsername("Admin")
+                .enterPassword("admin123")
+                .clickLogin()
+                .getHomePageTitle();
 
-        OrangeHRMHomePage ohhp = new OrangeHRMHomePage();
-        String homePageTitle = ohhp.getTitle();
-        Assertions.assertThat(homePageTitle)
+        assertThat(homePageTitle)
                 .isNotNull()
                 .isNotBlank()
                 .isNotEmpty()
                 .isEqualTo("OrangeHRM");
 
-        ohhp.clickDropdownMenu();
-        ohhp.clickFromMenuoptions("Logout");
-
-        boolean isHeaderTextPresent = ohlp.getHeader();
-        Assertions.assertThat(isHeaderTextPresent)
+        boolean isHeaderTextPresent = new OrangeHRMHomePage()
+                .clickDropdownMenu()
+                .clickFromMenuoptions("Logout")
+                .getLoginPageHeader();
+        assertThat(isHeaderTextPresent)
                 .isTrue();
 
 

@@ -19,20 +19,23 @@ public final class OrangeHRMLoginPage {
     private final By headerText = By.xpath("//h5[normalize-space()='Login']");
 
     // Methods
-    public void enterUsername(String username) {
+    public OrangeHRMLoginPage enterUsername(String username) {
         DriverManager.getDriver().findElement(inputUsername).sendKeys(username);
+        return this;
     }
 
-    public void enterPassword(String password) {
+    public OrangeHRMLoginPage enterPassword(String password) {
         DriverManager.getDriver().findElement(inputPassword).sendKeys(password);
+        return this;
     }
 
-    public void clickLogin() {
+    public OrangeHRMHomePage clickLogin() {
         DriverManager.getDriver().findElement(btnLogin).click();
         Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(3));
+        return new OrangeHRMHomePage();
     }
 
-    public boolean getHeader() {
+    public boolean getLoginPageHeader() {
         new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10))
                 .until(driver -> driver.findElement(headerText).isDisplayed());
         return DriverManager.getDriver().findElement(headerText).isDisplayed();
