@@ -2,6 +2,7 @@ package com.rdb.pages;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.rdb.driver.DriverManager;
+import com.rdb.enums.WaitStrategy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -17,13 +18,13 @@ public final class OrangeHRMHomePage extends BasePage {
     // Methods
 
     public OrangeHRMHomePage clickDropdownMenu() {
-        click(drpdownUserMenu, "visibe");
+        click(drpdownUserMenu, WaitStrategy.VISIBLE);
         return this;
     }
 
     public OrangeHRMLoginPage clickFromMenuOptions(String option) {
         WebElement menuOption = DriverManager.getDriver().findElement(By.xpath(menuItems.replace("%value%", option)));
-        click(menuOption, "clickable");
+        click(menuOption, WaitStrategy.CLICKABLE);
         Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(3));
         return new OrangeHRMLoginPage();
     }

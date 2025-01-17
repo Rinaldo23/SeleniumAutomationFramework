@@ -2,6 +2,7 @@ package com.rdb.pages;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.rdb.driver.DriverManager;
+import com.rdb.enums.WaitStrategy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -17,17 +18,17 @@ public final class OrangeHRMLoginPage extends BasePage {
 
     // Methods
     public OrangeHRMLoginPage enterUsername(String username) {
-        setTextBoxValue(inputUsername, username, "visible");
+        setTextBoxValue(inputUsername, username, WaitStrategy.VISIBLE);
         return this;
     }
 
     public OrangeHRMLoginPage enterPassword(String password) {
-        setTextBoxValue(inputPassword, password, "clickable");
+        setTextBoxValue(inputPassword, password, WaitStrategy.VISIBLE);
         return this;
     }
 
     public OrangeHRMHomePage clickLogin() {
-        click(btnLogin, "clickable");
+        click(btnLogin, WaitStrategy.CLICKABLE);
         Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(3));
         return new OrangeHRMHomePage();
     }
