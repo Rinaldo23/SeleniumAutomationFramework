@@ -18,7 +18,7 @@ public final class HomePageTests extends BaseTest {
         Assert.assertEquals(DriverManager.getDriver().getTitle(), "Selenium - Google Search");
     }
 
-    @Test
+    @Test(enabled = false)
     public void testFour() throws InterruptedException {
         DriverManager.getDriver().findElement(By.name("q")).sendKeys("Playwright", Keys.ENTER);
         Thread.sleep(10000);

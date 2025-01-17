@@ -15,15 +15,11 @@ public final class Driver {
     public static void initDriver() throws Exception {
         if (Objects.isNull(DriverManager.getDriver())) {
             System.setProperty("webdriver.chrome.driver", FrameworkConstants.getChromeDriverPath());
-
-//            WebDriver driver = new ChromeDriver();
-//            DriverManager.setDriver(driver);
-
             DriverManager.setDriver(new ChromeDriver());
 
             DriverManager.getDriver().get(ReadPropertyFile.getValue("url"));
+            
             DriverManager.getDriver().manage().window().maximize();
-
             DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         }
     }

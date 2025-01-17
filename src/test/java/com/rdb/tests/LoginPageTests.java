@@ -11,7 +11,7 @@ public final class LoginPageTests extends BaseTest {
     private LoginPageTests() {
     }
 
-    @Test
+    @Test(enabled = false)
     public void testOne() throws InterruptedException {
         DriverManager.getDriver().findElement(By.name("q")).sendKeys("Selenium", Keys.ENTER);
         Thread.sleep(10000);

@@ -34,5 +34,4 @@ public class GoogleTests extends BaseTest {
                 .contains("Selenium");
 
     }
-
 }

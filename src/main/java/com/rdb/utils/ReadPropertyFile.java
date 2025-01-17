@@ -24,15 +24,14 @@ public final class ReadPropertyFile {
                 CONFIGMAP.put(String.valueOf(entry.getKey()), String.valueOf(entry.getValue()).trim()); // To remove the spaces at the end
             }
 
-//            prop.entrySet().forEach(entry -> CONFIGMAP.put(String.valueOf(entry.getKey()), String.valueOf(entry.getValue())));  // --> Java 1.8+
-//            prop.forEach((key, value) -> CONFIGMAP.put(String.valueOf(key), String.valueOf(value)));                            // --> Java 1.8+
-
             fis.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    /*prop.entrySet().forEach(entry -> CONFIGMAP.put(String.valueOf(entry.getKey()), String.valueOf(entry.getValue())));  // --> Java 1.8+
+    prop.forEach((key, value) -> CONFIGMAP.put(String.valueOf(key), String.valueOf(value)));  */                          // --> Java 1.8+
 
     private ReadPropertyFile() {
     }

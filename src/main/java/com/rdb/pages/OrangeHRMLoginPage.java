@@ -7,30 +7,27 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public final class OrangeHRMLoginPage {
+public final class OrangeHRMLoginPage extends BasePage {
 
     // Locators
     private final By inputUsername = By.name("username");
-
     private final By inputPassword = By.xpath("//input[@name='password' and @type='password']");
-
     private final By btnLogin = By.xpath("//div[contains(@class, 'orangehrm-login-action')]/child::button");
-
     private final By headerText = By.xpath("//h5[normalize-space()='Login']");
 
     // Methods
     public OrangeHRMLoginPage enterUsername(String username) {
-        DriverManager.getDriver().findElement(inputUsername).sendKeys(username);
+        setTextBoxValue(inputUsername, username, "visible");
         return this;
     }
 
     public OrangeHRMLoginPage enterPassword(String password) {
-        DriverManager.getDriver().findElement(inputPassword).sendKeys(password);
+        setTextBoxValue(inputPassword, password, "clickable");
         return this;
     }
 
     public OrangeHRMHomePage clickLogin() {
-        DriverManager.getDriver().findElement(btnLogin).click();
+        click(btnLogin, "clickable");
         Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(3));
         return new OrangeHRMHomePage();
     }

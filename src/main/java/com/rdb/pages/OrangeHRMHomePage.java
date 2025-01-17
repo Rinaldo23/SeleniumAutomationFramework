@@ -4,30 +4,26 @@ import com.google.common.util.concurrent.Uninterruptibles;
 import com.rdb.driver.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public final class OrangeHRMHomePage {
+public final class OrangeHRMHomePage extends BasePage {
 
     // Locators
     private final By drpdownUserMenu = By.xpath("//li[contains(@class, 'oxd-userdropdown')]");
 
-    private String menuItems = "//a[text()='%value%']";  // --> Dynamic Xpath
+    private final String menuItems = "//a[text()='%value%']";  // --> Dynamic Xpath
 
     // Methods
 
     public OrangeHRMHomePage clickDropdownMenu() {
-        DriverManager.getDriver().findElement(drpdownUserMenu).click();
+        click(drpdownUserMenu, "visibe");
         return this;
     }
 
-    public OrangeHRMLoginPage clickFromMenuoptions(String option) {
-        WebElement element = DriverManager.getDriver().findElement(By.xpath(menuItems.replace("%value%", option)));
-        new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(element))
-                .click();
+    public OrangeHRMLoginPage clickFromMenuOptions(String option) {
+        WebElement menuOption = DriverManager.getDriver().findElement(By.xpath(menuItems.replace("%value%", option)));
+        click(menuOption, "clickable");
         Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(3));
         return new OrangeHRMLoginPage();
     }

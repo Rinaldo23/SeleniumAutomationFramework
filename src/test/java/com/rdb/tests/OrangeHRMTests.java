@@ -28,11 +28,10 @@ public class OrangeHRMTests extends BaseTest {
 
         boolean isHeaderTextPresent = new OrangeHRMHomePage()
                 .clickDropdownMenu()
-                .clickFromMenuoptions("Logout")
+                .clickFromMenuOptions("Logout")
                 .getLoginPageHeader();
         assertThat(isHeaderTextPresent)
                 .isTrue();
-
 
     }
 
