@@ -1,6 +1,7 @@
 package com.rdb.utils;
 
 import com.rdb.constants.FrameworkConstants;
+import com.rdb.enums.ConfigProperties;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -9,7 +10,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
 
-public final class ReadPropertyFile {
+public final class PropertyUtils {
 
     private static final Map<String, String> CONFIGMAP = new HashMap<>();
     private static final Properties prop = new Properties();
@@ -33,14 +34,14 @@ public final class ReadPropertyFile {
     /*prop.entrySet().forEach(entry -> CONFIGMAP.put(String.valueOf(entry.getKey()), String.valueOf(entry.getValue())));  // --> Java 1.8+
     prop.forEach((key, value) -> CONFIGMAP.put(String.valueOf(key), String.valueOf(value)));  */                          // --> Java 1.8+
 
-    private ReadPropertyFile() {
+    private PropertyUtils() {
     }
 
-    public static String getValue(String key) throws Exception {
-        if (Objects.isNull(key) || Objects.isNull(CONFIGMAP.get(key))) {
+    public static String getValue(ConfigProperties key) throws Exception {
+        if (Objects.isNull(key) || Objects.isNull(CONFIGMAP.get(key.name().toLowerCase()))) {
             throw new Exception("Property key " + key + " not found in config.properties File.");
         }
-        return CONFIGMAP.get(key);
+        return CONFIGMAP.get(key.name().toLowerCase());
     }
 
     // Lazy Initialization
