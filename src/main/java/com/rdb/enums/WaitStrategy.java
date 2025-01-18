@@ -4,6 +4,5 @@ public enum WaitStrategy {
 
     VISIBLE,
     CLICKABLE
-
-
+    
 }

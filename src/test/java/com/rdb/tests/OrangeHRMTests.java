@@ -11,28 +11,30 @@ public class OrangeHRMTests extends BaseTest {
     private OrangeHRMTests() {
     }
 
-    @Test
+    @Test()
     public void loginTest() {
 
-        String homePageTitle = new OrangeHRMLoginPage()
+        String homePageUrl = new OrangeHRMLoginPage()
                 .enterUsername("Admin")
                 .enterPassword("admin123")
                 .clickLogin()
-                .getHomePageTitle();
+                .getPageUrl();
 
-        assertThat(homePageTitle)
+        assertThat(homePageUrl)
                 .isNotNull()
                 .isNotBlank()
                 .isNotEmpty()
-                .isEqualTo("OrangeHRM");
+                .containsPattern("/dashboard/");
 
-        boolean isHeaderTextPresent = new OrangeHRMHomePage()
+        String loginPageUrl = new OrangeHRMHomePage()
                 .clickDropdownMenu()
                 .clickFromMenuOptions("Logout")
-                .getLoginPageHeader();
-        assertThat(isHeaderTextPresent)
-                .isTrue();
+                .getPageUrl();
+        assertThat(loginPageUrl)
+                .isNotNull()
+                .isNotBlank()
+                .isNotEmpty()
+                .containsPattern("/auth/login");
 
     }
-
 }

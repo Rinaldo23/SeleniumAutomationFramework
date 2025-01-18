@@ -4,25 +4,28 @@ import com.rdb.driver.DriverManager;
 import com.rdb.enums.WaitStrategy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
+import static com.rdb.factories.ExplicitWaitFactory.performExplicitWait;
 
 public class BasePage {
 
     protected BasePage() {
     }
 
+    /*public static void waitForPageToLoad() {
+        new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(60))
+                .until(driver -> Objects.equals(((JavascriptExecutor) driver).executeScript("return document.readyState"), "complete"));
+    }*/
+
+    private boolean elementIsInteractable(WebElement element) {
+        return element.isDisplayed() && element.isEnabled();
+    }
+
     protected void click(WebElement element, WaitStrategy waitStrategy) {
-        if (waitStrategy == WaitStrategy.VISIBLE) {
-            new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10))
-                    .until(ExpectedConditions.visibilityOf(element));
-        } else if (waitStrategy == WaitStrategy.CLICKABLE) {
-            new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10))
-                    .until(ExpectedConditions.elementToBeClickable(element));
+        WebElement webElement = performExplicitWait(element, waitStrategy);
+        if (elementIsInteractable(webElement)) {
+            webElement.click();
         }
-        element.click();
     }
 
     protected void click(By locator, WaitStrategy waitStrategy) {
@@ -31,18 +34,22 @@ public class BasePage {
     }
 
     protected void setTextBoxValue(WebElement element, String text, WaitStrategy waitStrategy) {
-        if (waitStrategy == WaitStrategy.VISIBLE) {
-            new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10))
-                    .until(ExpectedConditions.visibilityOf(element));
-        } else if (waitStrategy == WaitStrategy.CLICKABLE) {
-            new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10))
-                    .until(ExpectedConditions.elementToBeClickable(element));
+        WebElement webElement = performExplicitWait(element, waitStrategy);
+        if (elementIsInteractable(webElement)) {
+            webElement.sendKeys(text);
         }
-        element.sendKeys(text);
     }
 
     protected void setTextBoxValue(By locator, String text, WaitStrategy waitStrategy) {
         WebElement element = DriverManager.getDriver().findElement(locator);
         setTextBoxValue(element, text, waitStrategy);
+    }
+
+    public String getPageTitle() {
+        return DriverManager.getDriver().getTitle();
+    }
+
+    public String getPageUrl() {
+        return DriverManager.getDriver().getCurrentUrl();
     }
 }
