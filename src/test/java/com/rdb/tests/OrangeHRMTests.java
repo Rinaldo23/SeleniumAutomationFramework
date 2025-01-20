@@ -58,7 +58,7 @@ public class OrangeHRMTests extends BaseTest {
     }
 
 
-    @DataProvider(name = "loginCredentials")
+    @DataProvider(name = "loginCredentials", parallel = true)
     public String[][] getData(Method m) {
         String[][] data;
         if (m.getName().equalsIgnoreCase("loginTestWithValidCredentials")) {
