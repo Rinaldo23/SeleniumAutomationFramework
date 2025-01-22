@@ -2,6 +2,7 @@ package com.rdb.tests;
 
 import com.rdb.pages.OrangeHRMHomePage;
 import com.rdb.pages.OrangeHRMLoginPage;
+import com.rdb.reports.ExtentReport;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -16,6 +17,8 @@ public class OrangeHRMTests extends BaseTest {
 
     @Test(dataProvider = "loginCredentials")
     public void loginTestWithValidCredentials(String username, String password) {
+
+        ExtentReport.createTest("loginTestWithValidCredentials");
 
         String homePageUrl = new OrangeHRMLoginPage()
                 .enterUsername(username)
@@ -44,6 +47,8 @@ public class OrangeHRMTests extends BaseTest {
     @Test(dataProvider = "loginCredentials")
     public void loginTestWithInValidCredentials(String username, String password) {
 
+        ExtentReport.createTest("loginTestWithInValidCredentials");
+
         String homePageUrl = new OrangeHRMLoginPage()
                 .enterUsername(username)
                 .enterPassword(password)
@@ -56,7 +61,6 @@ public class OrangeHRMTests extends BaseTest {
                 .isNotEmpty()
                 .containsPattern("/auth/login");
     }
-
 
     @DataProvider(name = "loginCredentials", parallel = true)
     public String[][] getData(Method m) {
