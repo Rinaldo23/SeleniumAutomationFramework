@@ -1,7 +1,7 @@
 package com.rdb.pages;
 
 import com.rdb.enums.WaitStrategy;
-import com.rdb.reports.ExtentManager;
+import com.rdb.reports.ExtentLogger;
 import org.openqa.selenium.By;
 
 public final class OrangeHRMLoginPage extends BasePage {
@@ -14,19 +14,19 @@ public final class OrangeHRMLoginPage extends BasePage {
     // Methods
     public OrangeHRMLoginPage enterUsername(String username) {
         setTextBoxValue(inputUsername, username, WaitStrategy.CLICKABLE);
-        ExtentManager.getExtentTest().pass("Text box value set to " + username);
+        ExtentLogger.pass("Text box value set to " + username);
         return this;
     }
 
     public OrangeHRMLoginPage enterPassword(String password) {
         setTextBoxValue(inputPassword, password, WaitStrategy.VISIBLE);
-        ExtentManager.getExtentTest().pass("Text box value set to " + password);
+        ExtentLogger.pass("Text box value set to " + password);
         return this;
     }
 
     public OrangeHRMHomePage clickLogin() {
         click(btnLogin, WaitStrategy.CLICKABLE);
-        ExtentManager.getExtentTest().pass("Clicked on " + btnLogin + " button");
+        ExtentLogger.pass("Clicked on " + btnLogin + " button");
         return new OrangeHRMHomePage();
     }
 }

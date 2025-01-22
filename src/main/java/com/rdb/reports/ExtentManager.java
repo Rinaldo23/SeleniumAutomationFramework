@@ -10,15 +10,15 @@ public final class ExtentManager {
 
     }
 
-    public static ExtentTest getExtentTest() {
+    static ExtentTest getExtentTest() {
         return extText.get();
     }
 
-    public static void setExtentText(ExtentTest test) {
+    static void setExtentText(ExtentTest test) {
         extText.set(test);
     }
 
-    public static void unload() {
+    static void unload() {
         extText.remove();
     }
 
