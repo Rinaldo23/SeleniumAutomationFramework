@@ -2,6 +2,7 @@ package com.rdb.pages;
 
 import com.rdb.driver.DriverManager;
 import com.rdb.enums.WaitStrategy;
+import com.rdb.reports.ExtentLogger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -21,16 +22,17 @@ public class BasePage {
         return element.isDisplayed() && element.isEnabled();
     }
 
-    protected void click(WebElement element, WaitStrategy waitStrategy) {
+    protected void click(WebElement element, String elementName, WaitStrategy waitStrategy) {
         WebElement webElement = performExplicitWait(element, waitStrategy);
         if (elementIsInteractable(webElement)) {
             webElement.click();
         }
+        ExtentLogger.pass("Successfully clicked on " + elementName);
     }
 
-    protected void click(By locator, WaitStrategy waitStrategy) {
+    protected void click(By locator, String elementName, WaitStrategy waitStrategy) {
         WebElement element = DriverManager.getDriver().findElement(locator);
-        click(element, waitStrategy);
+        click(element, elementName, waitStrategy);
     }
 
     protected void setTextBoxValue(WebElement element, String text, WaitStrategy waitStrategy) {
@@ -38,6 +40,7 @@ public class BasePage {
         if (elementIsInteractable(webElement)) {
             webElement.sendKeys(text);
         }
+        ExtentLogger.pass("Text box value set to " + text);
     }
 
     protected void setTextBoxValue(By locator, String text, WaitStrategy waitStrategy) {
