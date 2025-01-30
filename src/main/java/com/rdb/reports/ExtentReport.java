@@ -3,6 +3,7 @@ package com.rdb.reports;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import com.rdb.constants.FrameworkConstants;
 
 import java.awt.*;
 import java.io.File;
@@ -19,7 +20,12 @@ public final class ExtentReport {
     public static void initReports() {
         if (Objects.isNull(extent)) {
             extent = new ExtentReports();
-            ExtentSparkReporter spark = new ExtentSparkReporter("index.html");
+            ExtentSparkReporter spark = null;
+            try {
+                spark = new ExtentSparkReporter(FrameworkConstants.getExtentReportFilePath());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             extent.attachReporter(spark);
 
             spark.config().setTheme(Theme.DARK);
@@ -32,7 +38,11 @@ public final class ExtentReport {
         if (Objects.nonNull(extent)) {
             extent.flush();
             ExtentManager.unload();
-            Desktop.getDesktop().browse(new File("index.html").toURI());
+            try {
+                Desktop.getDesktop().browse(new File(FrameworkConstants.getExtentReportFilePath()).toURI());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

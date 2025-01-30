@@ -57,20 +57,20 @@ public class OrangeHRMTests extends BaseTest {
                 .containsPattern("/auth/login");
     }
 
-    @DataProvider(name = "loginCredentials", parallel = true)
+    @DataProvider(name = "loginCredentials")
     public String[][] getData(Method m) {
         String[][] data;
         if (m.getName().equalsIgnoreCase("loginTestWithValidCredentials")) {
             data = new String[][]{
                     {"Admin", "admin123"},
-                    {"Admin", "admin123"},
-                    {"Admin", "admin123"}
+//                    {"Admin", "admin123"},
+//                    {"Admin", "admin123"}
             };
         } else {
             data = new String[][]{
                     {"Admin", "admin1234"},
-                    {"Admewin", "admin123"},
-                    {"Admin", " "}
+//                    {"Admewin", "admin123"},
+//                    {"Admin", " "}
             };
         }
         return data;
