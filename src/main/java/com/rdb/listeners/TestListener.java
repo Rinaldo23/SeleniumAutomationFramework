@@ -10,7 +10,7 @@ import org.testng.ITestResult;
 import java.io.IOException;
 
 public final class TestListener implements ITestListener, ISuiteListener {
-    
+
     @Override
     public void onStart(ISuite suite) {
         ExtentReport.initReports();
@@ -37,11 +37,11 @@ public final class TestListener implements ITestListener, ISuiteListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
-        ExtentLogger.pass(result.getMethod().getMethodName() + "is failed!");
+        ExtentLogger.fail(result.getMethod().getMethodName() + "is failed!", true);
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        ExtentLogger.pass(result.getMethod().getMethodName() + "is skipped!");
+        ExtentLogger.skip(result.getMethod().getMethodName() + "is skipped!", true);
     }
 }

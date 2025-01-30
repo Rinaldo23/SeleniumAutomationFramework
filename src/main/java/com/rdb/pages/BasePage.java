@@ -27,7 +27,7 @@ public class BasePage {
         if (elementIsInteractable(webElement)) {
             webElement.click();
         }
-        ExtentLogger.pass("Successfully clicked on " + elementName);
+        ExtentLogger.pass("Successfully clicked on " + elementName, true);
     }
 
     protected void click(By locator, String elementName, WaitStrategy waitStrategy) {
@@ -40,7 +40,7 @@ public class BasePage {
         if (elementIsInteractable(webElement)) {
             webElement.sendKeys(text);
         }
-        ExtentLogger.pass("Text box value set to " + text);
+        ExtentLogger.pass("Text box value set to " + text, true);
     }
 
     protected void setTextBoxValue(By locator, String text, WaitStrategy waitStrategy) {

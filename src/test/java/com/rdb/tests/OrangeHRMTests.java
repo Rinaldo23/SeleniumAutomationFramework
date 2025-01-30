@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import java.lang.reflect.Method;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 public class OrangeHRMTests extends BaseTest {
 
@@ -55,6 +56,8 @@ public class OrangeHRMTests extends BaseTest {
                 .isNotBlank()
                 .isNotEmpty()
                 .containsPattern("/auth/login");
+
+        fail();
     }
 
     @DataProvider(name = "loginCredentials")

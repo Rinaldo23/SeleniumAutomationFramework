@@ -3,5 +3,9 @@ package com.rdb.enums;
 public enum ConfigProperties {
 
     URL,
-    OVERRIDEREPORTS
+    OVERRIDEREPORTS,
+    PASSEDSTEPSCREENSHOT,
+    FAILEDSTEPSCREENSHOT,
+    SKIPPEDSTEPSCREENSHOT
+    
 }
