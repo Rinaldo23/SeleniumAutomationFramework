@@ -9,6 +9,7 @@ public final class FrameworkConstants {
     private static final String CHROMEDRIVERPATH = RESOUCESPATH + "/Executables/chromedriver.exe";
     private static final String CONFIGFILEPATH = RESOUCESPATH + "/Config/config.properties";
     private static final String JSONCONFIGFILEPATH = RESOUCESPATH + "/Config/config.json";
+    private static final String EXCELFILEPATH = RESOUCESPATH + "/Excel/testdata.xlsx";
     private static final String EXTENTREPORTFOLDERPATH = System.getProperty("user.dir") + "/extent-test-output/";
     private static String extentReportFilePath = "";
 
@@ -32,6 +33,10 @@ public final class FrameworkConstants {
 
     public static String getJsonConfigFilePath() {
         return JSONCONFIGFILEPATH;
+    }
+
+    public static String getExcelFilePath() {
+        return EXCELFILEPATH;
     }
 
     private static String createExtentReportFolderPath() throws Exception {
