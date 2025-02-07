@@ -11,6 +11,8 @@ public final class FrameworkConstants {
     private static final String JSONCONFIGFILEPATH = RESOUCESPATH + "/Config/config.json";
     private static final String EXCELFILEPATH = RESOUCESPATH + "/Excel/testdata.xlsx";
     private static final String EXTENTREPORTFOLDERPATH = System.getProperty("user.dir") + "/extent-test-output/";
+    private static final String TESTDATASHEETNAME = "Tests";
+    private static final String DATAPROVIDERSHEETNAME = "DataProviderTests";
     private static String extentReportFilePath = "";
 
     private FrameworkConstants() {
@@ -37,6 +39,14 @@ public final class FrameworkConstants {
 
     public static String getExcelFilePath() {
         return EXCELFILEPATH;
+    }
+
+    public static String getTestDataSheetname() {
+        return TESTDATASHEETNAME;
+    }
+
+    public static String getDataProviderSheetname() {
+        return DATAPROVIDERSHEETNAME;
     }
 
     private static String createExtentReportFolderPath() throws Exception {

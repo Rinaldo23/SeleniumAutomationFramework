@@ -14,13 +14,12 @@ public final class ExcelUtils {
     private ExcelUtils() {
     }
 
-    public static List<Map<String, String>> getTestDetails() {
+    public static List<Map<String, String>> getTestDetails(String sheetname) {
         List<Map<String, String>> list = new ArrayList<>();
         FileInputStream fis = null;
         try {
             fis = new FileInputStream(FrameworkConstants.getExcelFilePath());
             XSSFWorkbook workbook = new XSSFWorkbook(fis);
-            String sheetname = "Runner";
             XSSFSheet sheet = workbook.getSheet(sheetname);
 
             int lastrownum = sheet.getLastRowNum();
@@ -34,7 +33,7 @@ public final class ExcelUtils {
 
                     String key = df.formatCellValue(sheet.getRow(0).getCell(col));
                     String value = df.formatCellValue(sheet.getRow(row).getCell(col));
-                    
+
                     map.put(key, value);
                 }
                 list.add(map);

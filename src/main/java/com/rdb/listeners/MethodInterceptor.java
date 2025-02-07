@@ -1,5 +1,6 @@
 package com.rdb.listeners;
 
+import com.rdb.constants.FrameworkConstants;
 import com.rdb.utils.ExcelUtils;
 import org.testng.IMethodInstance;
 import org.testng.IMethodInterceptor;
@@ -15,8 +16,8 @@ public class MethodInterceptor implements IMethodInterceptor {
     public List<IMethodInstance> intercept(List<IMethodInstance> methods, ITestContext context) {
 
         List<IMethodInstance> result = new ArrayList<>();
-        List<Map<String, String>> list = ExcelUtils.getTestDetails();
-        System.out.println(list);
+        List<Map<String, String>> list = ExcelUtils.getTestDetails(FrameworkConstants.getTestDataSheetname());
+        //System.out.println(list);
 
         for (int i = 0; i < methods.size(); i++) {
             for (int j = 0; j < list.size(); j++) {

@@ -2,25 +2,24 @@ package com.rdb.tests;
 
 import com.rdb.pages.OrangeHRMHomePage;
 import com.rdb.pages.OrangeHRMLoginPage;
-import org.testng.annotations.DataProvider;
+import com.rdb.utils.DataProviderUtils;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Method;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 
 public class OrangeHRMTests extends BaseTest {
 
     private OrangeHRMTests() {
     }
 
-    @Test(dataProvider = "loginCredentials")
-    public void loginTestWithValidCredentials(String username, String password) {
+    @Test(dataProvider = "getData", dataProviderClass = DataProviderUtils.class)
+    public void loginTestWithValidCredentials(Map<String, String> m) {
 
         String homePageUrl = new OrangeHRMLoginPage()
-                .enterUsername(username)
-                .enterPassword(password)
+                .enterUsername(m.get("username"))
+                .enterPassword(m.get("password"))
                 .clickLogin()
                 .getPageUrl();
 
@@ -42,12 +41,12 @@ public class OrangeHRMTests extends BaseTest {
                 .containsPattern("/auth/login");
     }
 
-    @Test(dataProvider = "loginCredentials")
-    public void loginTestWithInValidCredentials(String username, String password) {
+    @Test(dataProvider = "getData", dataProviderClass = DataProviderUtils.class)
+    public void loginTestWithInValidCredentials(Map<String, String> m) {
 
         String homePageUrl = new OrangeHRMLoginPage()
-                .enterUsername(username)
-                .enterPassword(password)
+                .enterUsername(m.get("username"))
+                .enterPassword(m.get("password"))
                 .clickLogin()
                 .getPageUrl();
 
@@ -56,28 +55,26 @@ public class OrangeHRMTests extends BaseTest {
                 .isNotBlank()
                 .isNotEmpty()
                 .containsPattern("/auth/login");
-
-        fail();
     }
 
-    @DataProvider(name = "loginCredentials")
-    public String[][] getData(Method m) {
-        String[][] data;
-        if (m.getName().equalsIgnoreCase("loginTestWithValidCredentials")) {
-            data = new String[][]{
-                    {"Admin", "admin123"},
+//    @DataProvider(name = "loginCredentials")
+//    public String[][] getData(Method m) {
+//        String[][] data;
+//        if (m.getName().equalsIgnoreCase("loginTestWithValidCredentials")) {
+//            data = new String[][]{
 //                    {"Admin", "admin123"},
-//                    {"Admin", "admin123"}
-            };
-        } else {
-            data = new String[][]{
-                    {"Admin", "admin1234"},
-//                    {"Admewin", "admin123"},
-//                    {"Admin", " "}
-            };
-        }
-        return data;
-    }
+////                    {"Admin", "admin123"},
+////                    {"Admin", "admin123"}
+//            };
+//        } else {
+//            data = new String[][]{
+//                    {"Admin", "admin1234"},
+////                    {"Admewin", "admin123"},
+////                    {"Admin", " "}
+//            };
+//        }
+//        return data;
+//    }
 
 
 }
