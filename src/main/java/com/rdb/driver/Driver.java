@@ -2,7 +2,7 @@ package com.rdb.driver;
 
 import com.rdb.constants.FrameworkConstants;
 import com.rdb.enums.ConfigProperties;
-import com.rdb.utils.JsonUtils;
+import com.rdb.utils.PropertyUtils;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
@@ -18,7 +18,8 @@ public final class Driver {
             System.setProperty("webdriver.chrome.driver", FrameworkConstants.getChromeDriverPath());
             DriverManager.setDriver(new ChromeDriver());
 
-            DriverManager.getDriver().get(JsonUtils.getValue(ConfigProperties.URL));
+//            DriverManager.getDriver().get(JsonUtils.getValue(ConfigProperties.URL));
+            DriverManager.getDriver().get(PropertyUtils.getValue(ConfigProperties.URL));
 
             DriverManager.getDriver().manage().window().maximize();
             DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

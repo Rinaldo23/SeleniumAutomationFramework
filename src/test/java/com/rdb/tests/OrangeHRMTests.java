@@ -1,5 +1,6 @@
 package com.rdb.tests;
 
+import com.rdb.listeners.RetryFailedTests;
 import com.rdb.pages.OrangeHRMHomePage;
 import com.rdb.pages.OrangeHRMLoginPage;
 import com.rdb.utils.DataProviderUtils;
@@ -14,7 +15,7 @@ public class OrangeHRMTests extends BaseTest {
     private OrangeHRMTests() {
     }
 
-    @Test(dataProvider = "getData", dataProviderClass = DataProviderUtils.class)
+    @Test(dataProvider = "getData", dataProviderClass = DataProviderUtils.class, retryAnalyzer = RetryFailedTests.class)
     public void loginTestWithValidCredentials(Map<String, String> m) {
 
         String homePageUrl = new OrangeHRMLoginPage()

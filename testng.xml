@@ -5,7 +5,7 @@
         <listener class-name="com.rdb.listeners.TestListener"/>
         <listener class-name="com.rdb.listeners.MethodInterceptor"/>
     </listeners>
-    <test name="OrangeHRMTest">
+    <test name="OrangeHRMTest" parallel="methods" thread-count="2">
         <classes>
             <class name="com.rdb.tests.OrangeHRMTests"/>
             <!--            <class name="com.rdb.tests.GoogleTests"/>-->
