@@ -4,6 +4,7 @@
     <listeners>
         <listener class-name="com.rdb.listeners.TestListener"/>
         <listener class-name="com.rdb.listeners.MethodInterceptor"/>
+        <listener class-name="com.rdb.listeners.AnnotationTransformer"/>
     </listeners>
     <test name="OrangeHRMTest" parallel="methods" thread-count="2">
         <classes>

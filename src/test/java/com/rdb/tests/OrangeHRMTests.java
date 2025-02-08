@@ -1,9 +1,7 @@
 package com.rdb.tests;
 
-import com.rdb.listeners.RetryFailedTests;
 import com.rdb.pages.OrangeHRMHomePage;
 import com.rdb.pages.OrangeHRMLoginPage;
-import com.rdb.utils.DataProviderUtils;
 import org.testng.annotations.Test;
 
 import java.util.Map;
@@ -15,7 +13,7 @@ public class OrangeHRMTests extends BaseTest {
     private OrangeHRMTests() {
     }
 
-    @Test(dataProvider = "getData", dataProviderClass = DataProviderUtils.class, retryAnalyzer = RetryFailedTests.class)
+    @Test
     public void loginTestWithValidCredentials(Map<String, String> m) {
 
         String homePageUrl = new OrangeHRMLoginPage()
@@ -42,7 +40,7 @@ public class OrangeHRMTests extends BaseTest {
                 .containsPattern("/auth/login");
     }
 
-    @Test(dataProvider = "getData", dataProviderClass = DataProviderUtils.class)
+    @Test
     public void loginTestWithInValidCredentials(Map<String, String> m) {
 
         String homePageUrl = new OrangeHRMLoginPage()

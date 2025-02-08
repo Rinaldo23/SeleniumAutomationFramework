@@ -27,7 +27,7 @@ public class BasePage {
         if (elementIsInteractable(webElement)) {
             webElement.click();
         }
-        ExtentLogger.pass("Successfully clicked on " + elementName, true);
+        ExtentLogger.pass("Successfully clicked on " + elementName, false);
     }
 
     protected void click(By locator, String elementName, WaitStrategy waitStrategy) {
