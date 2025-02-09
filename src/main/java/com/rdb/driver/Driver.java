@@ -9,6 +9,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Objects;
 
 public final class Driver {
@@ -21,6 +22,9 @@ public final class Driver {
 
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--incognito");
+            options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
+            options.setExperimentalOption("excludeSwitches", List.of("enable-automation")); // Hides Selenium usage
+            options.setExperimentalOption("useAutomationExtension", false);
 
             if (browserName.equalsIgnoreCase("chrome")) {
                 System.setProperty("webdriver.chrome.driver", FrameworkConstants.getChromeDriverPath());
