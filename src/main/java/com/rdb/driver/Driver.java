@@ -4,6 +4,7 @@ import com.rdb.constants.FrameworkConstants;
 import com.rdb.enums.ConfigProperties;
 import com.rdb.utils.PropertyUtils;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -18,9 +19,12 @@ public final class Driver {
     public static void initDriver(String browserName) throws Exception {
         if (Objects.isNull(DriverManager.getDriver())) {
 
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--incognito");
+
             if (browserName.equalsIgnoreCase("chrome")) {
                 System.setProperty("webdriver.chrome.driver", FrameworkConstants.getChromeDriverPath());
-                DriverManager.setDriver(new ChromeDriver());
+                DriverManager.setDriver(new ChromeDriver(options));
             } else if (browserName.equalsIgnoreCase("firefox")) {
                 System.setProperty("webdriver.gecko.driver", FrameworkConstants.getGeckoDriverPath());
                 DriverManager.setDriver(new FirefoxDriver());
@@ -36,6 +40,7 @@ public final class Driver {
             DriverManager.getDriver().get(PropertyUtils.getValue(ConfigProperties.URL));
 
             DriverManager.getDriver().manage().window().maximize();
+            DriverManager.getDriver().manage().deleteAllCookies();
             DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         }
     }

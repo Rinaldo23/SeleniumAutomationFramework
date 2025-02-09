@@ -5,6 +5,7 @@ import com.rdb.enums.WaitStrategy;
 import com.rdb.reports.ExtentLogger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import static com.rdb.factories.ExplicitWaitFactory.performExplicitWait;
 
@@ -33,6 +34,20 @@ public class BasePage {
     protected void click(By locator, String elementName, WaitStrategy waitStrategy) {
         WebElement element = DriverManager.getDriver().findElement(locator);
         click(element, elementName, waitStrategy);
+    }
+
+    protected void mouseHoverAndClick(WebElement element, String elementName, WaitStrategy waitStrategy) {
+        WebElement webElement = performExplicitWait(element, waitStrategy);
+        new Actions(DriverManager.getDriver())
+                .moveToElement(webElement)
+                .click()
+                .perform();
+        ExtentLogger.pass("Successfully clicked on " + elementName + " using Actions Class", false);
+    }
+
+    protected void mouseHoverAndClick(By locator, String elementName, WaitStrategy waitStrategy) {
+        WebElement element = DriverManager.getDriver().findElement(locator);
+        mouseHoverAndClick(element, elementName, waitStrategy);
     }
 
     protected void setTextBoxValue(WebElement element, String text, WaitStrategy waitStrategy) {
