@@ -39,6 +39,7 @@ public class BasePage {
     protected void mouseHoverAndClick(WebElement element, String elementName, WaitStrategy waitStrategy) {
         WebElement webElement = performExplicitWait(element, waitStrategy);
         new Actions(DriverManager.getDriver())
+                .scrollToElement(webElement)
                 .moveToElement(webElement)
                 .click()
                 .perform();

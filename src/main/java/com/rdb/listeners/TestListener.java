@@ -1,5 +1,6 @@
 package com.rdb.listeners;
 
+import com.rdb.FrameworkAnnotation;
 import com.rdb.reports.ExtentLogger;
 import com.rdb.reports.ExtentReport;
 import org.testng.ISuite;
@@ -29,6 +30,8 @@ public final class TestListener implements ITestListener, ISuiteListener {
     @Override
     public void onTestStart(ITestResult result) {
         ExtentReport.createTest(result.getMethod().getMethodName());
+        ExtentReport.addAuthors(result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(FrameworkAnnotation.class).authors());
+        ExtentReport.addCategories(result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(FrameworkAnnotation.class).categories());
     }
 
     @Override
