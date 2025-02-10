@@ -30,6 +30,9 @@ public final class AmazonHomePage extends BasePage {
     }
 
     public AmazonHamburgerMenuPage openAllCategoriesHamburgerMenu() {
+//        if (!btnHamburgerMenu.isDisplayed()) {
+//            refreshPage();
+//        }
         click(btnHamburgerMenu, "All Categories Menu", WaitStrategy.CLICKABLE);
         return new AmazonHamburgerMenuPage();
     }

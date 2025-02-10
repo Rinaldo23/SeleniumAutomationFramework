@@ -15,15 +15,13 @@ public final class AmazonHamburgerMenuPage extends BasePage {
     private final String subMenuOption = "//a[text()='%s']";
 
     public AmazonHamburgerMenuPage selectHamburgerMenuOption(String optionName) {
-        //String hamburgerMenuOption = menuOption.replace("%replace%", optionName);
         String hamburgerMenuOption = DynamicXpathUtils.getXpath(menuOption, optionName);
         click(By.xpath(hamburgerMenuOption), optionName, WaitStrategy.CLICKABLE);
-        Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(5));
+        Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(3));
         return this;
     }
 
     public AmazonTabletsPage selectHamburgerMenuSubOption(String subOptionName) {
-        //String hamburgerSubMenuOption = subMenuOption.replace("%replace%", subOptionName);
         String hamburgerSubMenuOption = DynamicXpathUtils.getXpath(subMenuOption, subOptionName);
         mouseHoverAndClick(By.xpath(hamburgerSubMenuOption), subOptionName, WaitStrategy.CLICKABLE);
         return new AmazonTabletsPage();

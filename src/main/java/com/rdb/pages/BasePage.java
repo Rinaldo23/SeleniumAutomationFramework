@@ -70,4 +70,8 @@ public class BasePage {
     public String getPageUrl() {
         return DriverManager.getDriver().getCurrentUrl();
     }
+
+    public void refreshPage() {
+        DriverManager.getDriver().navigate().refresh();
+    }
 }
