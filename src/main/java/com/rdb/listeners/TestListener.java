@@ -1,6 +1,6 @@
 package com.rdb.listeners;
 
-import com.rdb.FrameworkAnnotation;
+import com.rdb.annotations.FrameworkAnnotation;
 import com.rdb.reports.ExtentLogger;
 import com.rdb.reports.ExtentReport;
 import org.testng.ISuite;

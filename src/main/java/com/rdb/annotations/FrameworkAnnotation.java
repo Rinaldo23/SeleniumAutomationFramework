@@ -1,4 +1,6 @@
-package com.rdb;
+package com.rdb.annotations;
+
+import com.rdb.enums.CategoryType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -11,6 +13,6 @@ public @interface FrameworkAnnotation {
 
     public String[] authors();
 
-    public String[] categories();
+    public CategoryType[] categories();
 
 }

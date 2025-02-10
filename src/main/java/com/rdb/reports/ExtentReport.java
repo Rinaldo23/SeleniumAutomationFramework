@@ -4,6 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.rdb.constants.FrameworkConstants;
+import com.rdb.enums.CategoryType;
 
 import java.awt.*;
 import java.io.File;
@@ -56,9 +57,9 @@ public final class ExtentReport {
         }
     }
 
-    public static void addCategories(String[] categories) {
-        for (String category : categories) {
-            ExtentManager.getExtentTest().assignCategory(category);
+    public static void addCategories(CategoryType[] categories) {
+        for (CategoryType category : categories) {
+            ExtentManager.getExtentTest().assignCategory(category.toString());
         }
     }
 }

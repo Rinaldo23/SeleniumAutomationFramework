@@ -1,6 +1,7 @@
 package com.rdb.tests;
 
-import com.rdb.FrameworkAnnotation;
+import com.rdb.annotations.FrameworkAnnotation;
+import com.rdb.enums.CategoryType;
 import com.rdb.pages.amazonpages.AmazonHomePage;
 import org.testng.annotations.Test;
 
@@ -13,7 +14,7 @@ public final class AmazonTests extends BaseTest {
     private AmazonTests() {
     }
 
-    @FrameworkAnnotation(authors = {"Rinaldo", "Pankaj"}, categories = {"Smoke", "Regression"})
+    @FrameworkAnnotation(authors = {"Rinaldo", "Pankaj"}, categories = {CategoryType.SMOKE, CategoryType.REGRESSION})
     @Test
     public void navigateToTabletsPageViaHamburgerMenuTest(Map<String, String> m) {
         String pageTitle = new AmazonHomePage()
