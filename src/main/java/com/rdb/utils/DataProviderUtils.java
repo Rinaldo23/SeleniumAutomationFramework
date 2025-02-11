@@ -26,9 +26,9 @@ public final class DataProviderUtils {
 
         List<Map<String, String>> smallList = new ArrayList<>();
 
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).get("testname").equalsIgnoreCase(methodName) && list.get(i).get("execute").equalsIgnoreCase("yes")) {
-                smallList.add(list.get(i));
+        for (Map<String, String> map : list) {
+            if (map.get("testname").equalsIgnoreCase(methodName) && map.get("execute").equalsIgnoreCase("yes")) {
+                smallList.add(map);
             }
         }
 
