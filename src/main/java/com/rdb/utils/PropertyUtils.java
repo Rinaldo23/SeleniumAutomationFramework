@@ -17,15 +17,12 @@ public final class PropertyUtils {
 
     // Eager Initialization
     static {
-        try {
-            FileInputStream fis = new FileInputStream(FrameworkConstants.getConfigFilePath());
+        try (FileInputStream fis = new FileInputStream(FrameworkConstants.getConfigFilePath())) {
             prop.load(fis);
 
             for (Map.Entry<Object, Object> entry : prop.entrySet()) {
                 CONFIGMAP.put(String.valueOf(entry.getKey()), String.valueOf(entry.getValue()).trim()); // To remove the spaces at the end
             }
-
-            fis.close();
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -7,7 +7,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public final class ExcelUtils {
 
@@ -16,12 +19,12 @@ public final class ExcelUtils {
 
     public static List<Map<String, String>> getTestDetails(String sheetname) {
         List<Map<String, String>> list = new ArrayList<>();
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(FrameworkConstants.getExcelFilePath());
-            XSSFWorkbook workbook = new XSSFWorkbook(fis);
-            XSSFSheet sheet = workbook.getSheet(sheetname);
+        try (
+                FileInputStream fis = new FileInputStream(FrameworkConstants.getExcelFilePath());
+                XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        ) {
 
+            XSSFSheet sheet = workbook.getSheet(sheetname);
             int lastrownum = sheet.getLastRowNum();
             int lastcolnum = sheet.getRow(0).getLastCellNum();
 
@@ -40,14 +43,6 @@ public final class ExcelUtils {
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
-        } finally {
-            try {
-                if (Objects.nonNull(fis)) {
-                    fis.close();
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
         }
 
         return list;
