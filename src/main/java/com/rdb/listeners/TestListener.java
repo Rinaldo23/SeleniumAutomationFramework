@@ -8,7 +8,6 @@ import org.testng.ISuiteListener;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import java.io.IOException;
 import java.util.Arrays;
 
 public final class TestListener implements ITestListener, ISuiteListener {
@@ -20,11 +19,7 @@ public final class TestListener implements ITestListener, ISuiteListener {
 
     @Override
     public void onFinish(ISuite suite) {
-        try {
-            ExtentReport.flushReports();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        ExtentReport.flushReports();
     }
 
     @Override
@@ -36,7 +31,7 @@ public final class TestListener implements ITestListener, ISuiteListener {
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        ExtentLogger.pass(result.getMethod().getMethodName() + "is passed!");
+        ExtentLogger.pass(result.getMethod().getMethodName() + "is passed!", true);
     }
 
     @Override

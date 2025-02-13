@@ -8,7 +8,6 @@ import com.rdb.enums.CategoryType;
 
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 import java.util.Objects;
 
 public final class ExtentReport {
@@ -35,7 +34,7 @@ public final class ExtentReport {
         }
     }
 
-    public static void flushReports() throws IOException {
+    public static void flushReports() {
         if (Objects.nonNull(extent)) {
             extent.flush();
             ExtentManager.unload();

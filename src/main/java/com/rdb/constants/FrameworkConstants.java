@@ -11,7 +11,7 @@ public final class FrameworkConstants {
     private static final String GECKODRIVERPATH = RESOUCESPATH + "/Executables/geckodriver.exe";
     private static final String CONFIGFILEPATH = RESOUCESPATH + "/Config/config.properties";
     private static final String JSONCONFIGFILEPATH = RESOUCESPATH + "/Config/config.json";
-    private static final String EXCELFILEPATH = RESOUCESPATH + "/Excel/testdata1.xlsx";
+    private static final String EXCELFILEPATH = RESOUCESPATH + "/Excel/testdata.xlsx";
     private static final String EXTENTREPORTFOLDERPATH = System.getProperty("user.dir") + "/extent-test-output/";
     private static final String TESTDATASHEETNAME = "Tests";
     private static final String DATAPROVIDERSHEETNAME = "DataProviderTests";
@@ -20,7 +20,7 @@ public final class FrameworkConstants {
     private FrameworkConstants() {
     }
 
-    public static String getExtentReportFilePath() throws Exception {
+    public static String getExtentReportFilePath() {
         if (extentReportFilePath.isEmpty()) {
             extentReportFilePath = createExtentReportFolderPath();
         }
@@ -59,7 +59,7 @@ public final class FrameworkConstants {
         return DATAPROVIDERSHEETNAME;
     }
 
-    private static String createExtentReportFolderPath() throws Exception {
+    private static String createExtentReportFolderPath() {
         if (PropertyUtils.getValue(ConfigProperties.OVERRIDEREPORTS).equalsIgnoreCase("yes")) {
             return EXTENTREPORTFOLDERPATH + System.currentTimeMillis() + "/index.html";
         } else {

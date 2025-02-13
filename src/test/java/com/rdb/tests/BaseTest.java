@@ -13,7 +13,7 @@ public class BaseTest {
 
     @SuppressWarnings("unchecked")
     @BeforeMethod
-    public void setUp(Object[] data) throws Exception {
+    public void setUp(Object[] data) {
         Map<String, String> m = (Map<String, String>) data[0];
         Driver.initDriver(m.get("browser"));
     }

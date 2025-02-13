@@ -17,7 +17,7 @@ public final class Driver {
     private Driver() {
     }
 
-    public static void initDriver(String browserName) throws Exception {
+    public static void initDriver(String browserName) {
         if (Objects.isNull(DriverManager.getDriver())) {
 
             ChromeOptions options = new ChromeOptions();

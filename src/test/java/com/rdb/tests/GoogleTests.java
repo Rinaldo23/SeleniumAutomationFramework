@@ -1,11 +1,13 @@
 package com.rdb.tests;
 
+import com.google.common.util.concurrent.Uninterruptibles;
 import com.rdb.driver.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,10 +18,10 @@ public class GoogleTests extends BaseTest {
     }
 
     @Test
-    public void myFirstGoogleTest() throws InterruptedException {
+    public void myFirstGoogleTest() {
 
         DriverManager.getDriver().findElement(By.name("q")).sendKeys("Selenium", Keys.ENTER);
-        Thread.sleep(3000);
+        Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(3));
 
         String pageTitle = DriverManager.getDriver().getTitle();
         assertThat(pageTitle)
