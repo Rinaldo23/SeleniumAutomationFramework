@@ -6,6 +6,7 @@ import com.rdb.constants.FrameworkConstants;
 import com.rdb.enums.ConfigProperties;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -18,7 +19,7 @@ public final class JsonUtils {
         try {
             jSONCONGIFMAP = new ObjectMapper().readValue(new File(FrameworkConstants.getJsonConfigFilePath()), new TypeReference<HashMap<String, String>>() {
             });
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

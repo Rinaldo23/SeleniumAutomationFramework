@@ -2,6 +2,7 @@ package com.rdb.utils;
 
 import com.rdb.constants.FrameworkConstants;
 import com.rdb.exceptions.ExcelFileNotFoundException;
+import com.rdb.exceptions.FileProcessingException;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -46,7 +47,7 @@ public final class ExcelUtils {
         } catch (FileNotFoundException e) {
             throw new ExcelFileNotFoundException("Excel file not found at path: " + FrameworkConstants.getExcelFilePath(), e);
         } catch (IOException e) {
-            throw new RuntimeException("Excel file not found at path: " + FrameworkConstants.getExcelFilePath(), e);
+            throw new FileProcessingException("Error processing Excel file at path: " + FrameworkConstants.getExcelFilePath(), e);
         }
 
         return list;
