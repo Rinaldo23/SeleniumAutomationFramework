@@ -34,9 +34,9 @@ public final class PropertyUtils {
     private PropertyUtils() {
     }
 
-    public static String getValue(ConfigProperties key) throws Exception {
+    public static String getValue(ConfigProperties key) {
         if (Objects.isNull(key) || Objects.isNull(CONFIGMAP.get(key.name().toLowerCase()))) {
-            throw new Exception("Property key " + key + " not found in config.properties File.");
+            throw new RuntimeException("Property key " + key + " not found in config.properties File.");
         }
         return CONFIGMAP.get(key.name().toLowerCase());
     }

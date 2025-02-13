@@ -19,16 +19,16 @@ public final class JsonUtils {
             jSONCONGIFMAP = new ObjectMapper().readValue(new File(FrameworkConstants.getJsonConfigFilePath()), new TypeReference<HashMap<String, String>>() {
             });
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
     private JsonUtils() {
     }
 
-    public static String getValue(ConfigProperties key) throws Exception {
+    public static String getValue(ConfigProperties key) {
         if (Objects.isNull(key) || Objects.isNull(jSONCONGIFMAP.get(key.name().toLowerCase()))) {
-            throw new Exception("Property key " + key + " not found in config.properties File.");
+            throw new RuntimeException("Property key " + key + " not found in config.properties File.");
         }
         return jSONCONGIFMAP.get(key.name().toLowerCase());
     }
