@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rdb.constants.FrameworkConstants;
 import com.rdb.enums.ConfigProperties;
+import com.rdb.exceptions.PropertyNotFoundException;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +30,7 @@ public final class JsonUtils {
 
     public static String getValue(ConfigProperties key) {
         if (Objects.isNull(key) || Objects.isNull(jSONCONGIFMAP.get(key.name().toLowerCase()))) {
-            throw new RuntimeException("Property key " + key + " not found in config.properties File.");
+            throw new PropertyNotFoundException("Property key " + key + " not found in config.properties File.");
         }
         return jSONCONGIFMAP.get(key.name().toLowerCase());
     }

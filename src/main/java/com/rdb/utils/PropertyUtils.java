@@ -2,6 +2,7 @@ package com.rdb.utils;
 
 import com.rdb.constants.FrameworkConstants;
 import com.rdb.enums.ConfigProperties;
+import com.rdb.exceptions.PropertyNotFoundException;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -36,7 +37,7 @@ public final class PropertyUtils {
 
     public static String getValue(ConfigProperties key) {
         if (Objects.isNull(key) || Objects.isNull(CONFIGMAP.get(key.name().toLowerCase()))) {
-            throw new RuntimeException("Property key " + key + " not found in config.properties File.");
+            throw new PropertyNotFoundException("Property key " + key + " not found in config.properties File.");
         }
         return CONFIGMAP.get(key.name().toLowerCase());
     }
