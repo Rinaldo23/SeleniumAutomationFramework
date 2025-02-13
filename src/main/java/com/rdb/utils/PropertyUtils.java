@@ -2,6 +2,7 @@ package com.rdb.utils;
 
 import com.rdb.constants.FrameworkConstants;
 import com.rdb.enums.ConfigProperties;
+import com.rdb.exceptions.PropertyFileLoadException;
 import com.rdb.exceptions.PropertyNotFoundException;
 
 import java.io.FileInputStream;
@@ -26,7 +27,9 @@ public final class PropertyUtils {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            //System.exit(0);  // Bad practice - forcefully stops execution without proper error reporting
+            throw new ExceptionInInitializerError(new PropertyFileLoadException(
+                    "Failed to load config.properties file [ " + FrameworkConstants.getConfigFilePath() + "]. Please check the file path and ensure it exists.", e));
         }
     }
     /*prop.entrySet().forEach(entry -> CONFIGMAP.put(String.valueOf(entry.getKey()), String.valueOf(entry.getValue())));  // --> Java 1.8+
