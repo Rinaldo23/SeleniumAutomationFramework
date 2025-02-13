@@ -2,6 +2,7 @@ package com.rdb.driver;
 
 import com.rdb.constants.FrameworkConstants;
 import com.rdb.enums.ConfigProperties;
+import com.rdb.exceptions.BrowserNotSpecifiedException;
 import com.rdb.utils.PropertyUtils;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -36,7 +37,7 @@ public final class Driver {
                 System.setProperty("webdriver.edge.driver", FrameworkConstants.getEdgeDriverPath());
                 DriverManager.setDriver(new EdgeDriver());
             } else {
-                throw new RuntimeException("Browser not specified..!!!");
+                throw new BrowserNotSpecifiedException("Browser not specified in excel data sheet file.");
             }
 
 
