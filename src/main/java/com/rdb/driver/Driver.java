@@ -1,9 +1,9 @@
 package com.rdb.driver;
 
-import com.rdb.constants.FrameworkConstants;
 import com.rdb.enums.ConfigProperties;
 import com.rdb.exceptions.BrowserNotSpecifiedException;
 import com.rdb.utils.PropertyUtils;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -28,13 +28,13 @@ public final class Driver {
             options.setExperimentalOption("useAutomationExtension", false);
 
             if (browserName.equalsIgnoreCase("chrome")) {
-                System.setProperty("webdriver.chrome.driver", FrameworkConstants.getChromeDriverPath());
+                WebDriverManager.chromedriver().setup();
                 DriverManager.setDriver(new ChromeDriver(options));
             } else if (browserName.equalsIgnoreCase("firefox")) {
-                System.setProperty("webdriver.gecko.driver", FrameworkConstants.getGeckoDriverPath());
+                WebDriverManager.firefoxdriver().setup();
                 DriverManager.setDriver(new FirefoxDriver());
             } else if (browserName.equalsIgnoreCase("edge")) {
-                System.setProperty("webdriver.edge.driver", FrameworkConstants.getEdgeDriverPath());
+                WebDriverManager.edgedriver().setup();
                 DriverManager.setDriver(new EdgeDriver());
             } else {
                 throw new BrowserNotSpecifiedException("Browser not specified in excel data sheet file.");
