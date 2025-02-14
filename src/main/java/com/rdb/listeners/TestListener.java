@@ -9,6 +9,7 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public final class TestListener implements ITestListener, ISuiteListener {
 
@@ -25,8 +26,14 @@ public final class TestListener implements ITestListener, ISuiteListener {
     @Override
     public void onTestStart(ITestResult result) {
         ExtentReport.createTest(result.getMethod().getMethodName());
-        ExtentReport.addAuthors(result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(FrameworkAnnotation.class).authors());
-        ExtentReport.addCategories(result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(FrameworkAnnotation.class).categories());
+
+        if (Objects.nonNull(result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(FrameworkAnnotation.class))) {
+            ExtentReport.addAuthors(result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(FrameworkAnnotation.class).authors());
+        }
+
+        if (Objects.nonNull(result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(FrameworkAnnotation.class))) {
+            ExtentReport.addCategories(result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(FrameworkAnnotation.class).categories());
+        }
     }
 
     @Override

@@ -8,8 +8,8 @@
     </listeners>
     <test name="OrangeHRMTest">
         <classes>
-            <class name="com.rdb.tests.AmazonTests"/>
-            <!--            <class name="com.rdb.tests.OrangeHRMTests"/>-->
+            <!--            <class name="com.rdb.tests.AmazonTests"/>-->
+            <class name="com.rdb.tests.OrangeHRMTests"/>
             <!--            <class name="com.rdb.tests.GoogleTests"/>-->
             <!--            <class name="com.rdb.tests.LoginPageTests"/>-->
             <!--            <class name="com.rdb.tests.HomePageTests"/>-->

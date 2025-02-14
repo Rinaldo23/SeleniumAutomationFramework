@@ -38,8 +38,13 @@ public final class ExcelUtils {
                     DataFormatter df = new DataFormatter();
 
                     String key = df.formatCellValue(sheet.getRow(0).getCell(col));
-                    String value = df.formatCellValue(sheet.getRow(row).getCell(col));
-
+                    String value;
+                    if (key.equalsIgnoreCase("password")) {
+                        String encodedString = df.formatCellValue(sheet.getRow(row).getCell(col));
+                        value = DecodeUtils.getDecodedString(encodedString);
+                    } else {
+                        value = df.formatCellValue(sheet.getRow(row).getCell(col));
+                    }
                     map.put(key, value);
                 }
                 list.add(map);

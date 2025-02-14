@@ -9,7 +9,7 @@ public final class FrameworkConstants {
     private static final String CHROMEDRIVERPATH = RESOUCESPATH + "/Executables/chromedriver.exe";
     private static final String EDGEDRIVERPATH = RESOUCESPATH + "/Executables/msedgedriver.exe";
     private static final String GECKODRIVERPATH = RESOUCESPATH + "/Executables/geckodriver.exe";
-    private static final String CONFIGFILEPATH = RESOUCESPATH + "/Config/config1.properties";
+    private static final String CONFIGFILEPATH = RESOUCESPATH + "/Config/config.properties";
     private static final String JSONCONFIGFILEPATH = RESOUCESPATH + "/Config/config.json";
     private static final String EXCELFILEPATH = RESOUCESPATH + "/Excel/testdata.xlsx";
     private static final String EXTENTREPORTFOLDERPATH = System.getProperty("user.dir") + "/extent-test-output/";
