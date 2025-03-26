@@ -20,7 +20,7 @@ public final class Driver {
                 DriverManager.setDriver(DriverFactory.getDriver(browserName));
             } else if (browserName.equalsIgnoreCase("firefox")) {
                 DriverManager.setDriver(DriverFactory.getDriver(browserName));
-            } else if (browserName.equalsIgnoreCase("edge")) {
+            } else if (browserName.equalsIgnoreCase("MicrosoftEdge")) {
                 DriverManager.setDriver(DriverFactory.getDriver(browserName));
             } else {
                 throw new BrowserNotSpecifiedException("Browser not specified in excel data sheet file.");
@@ -31,7 +31,7 @@ public final class Driver {
 
             DriverManager.getDriver().manage().window().maximize();
             DriverManager.getDriver().manage().deleteAllCookies();
-            DriverManager.getDriver().navigate().refresh();
+//            DriverManager.getDriver().navigate().refresh();
             DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         }
     }

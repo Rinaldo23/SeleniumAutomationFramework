@@ -1,11 +1,14 @@
 package com.rdb.pages;
 
+import com.google.common.util.concurrent.Uninterruptibles;
 import com.rdb.driver.DriverManager;
 import com.rdb.enums.WaitStrategy;
 import com.rdb.reports.ExtentLogger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+
+import java.time.Duration;
 
 import static com.rdb.factories.ExplicitWaitFactory.performExplicitWait;
 
@@ -43,6 +46,7 @@ public class BasePage {
                 .moveToElement(webElement)
                 .click()
                 .perform();
+        Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(5));
         ExtentLogger.pass("Successfully clicked on " + elementName + " using Actions Class", false);
     }
 

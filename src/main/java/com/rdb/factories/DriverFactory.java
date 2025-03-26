@@ -7,8 +7,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 public final class DriverFactory {
@@ -20,32 +25,56 @@ public final class DriverFactory {
         WebDriver driver = null;
         String runmode = PropertyUtils.getValue(ConfigProperties.RUNMODE);
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--incognito");
-        options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
-        options.setExperimentalOption("excludeSwitches", List.of("enable-automation")); // Hides Selenium usage
-        options.setExperimentalOption("useAutomationExtension", false);
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--incognito");
+        chromeOptions.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
+        chromeOptions.setExperimentalOption("excludeSwitches", List.of("enable-automation")); // Hides Selenium usage
+        chromeOptions.setExperimentalOption("useAutomationExtension", false);
 
         if (browserName.equalsIgnoreCase("chrome")) {
             if (runmode.equalsIgnoreCase("remote")) {
                 // Remote WebDriver Logic to be Implemented
-                System.out.println("Remote WebDriver Logic....!!");
+                System.out.println("Remote WebDriver Logic - Chrome!!");
+                chromeOptions.setCapability("browserName", browserName);
+                try {
+                    driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException(e);
+                }
             } else {
                 WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver(options);
+                driver = new ChromeDriver(chromeOptions);
             }
         } else if (browserName.equalsIgnoreCase("firefox")) {
             if (runmode.equalsIgnoreCase("remote")) {
                 // Remote WebDriver Logic to be Implemented
-                System.out.println("Remote WebDriver Logic....!!");
+                System.out.println("Remote WebDriver Logic - Firefox!!");
+
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                firefoxOptions.setCapability("browserName", browserName);
+                try {
+                    driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), firefoxOptions);
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException(e);
+                }
+
             } else {
                 WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
             }
-        } else if (browserName.equalsIgnoreCase("edge")) {
+        } else if (browserName.equalsIgnoreCase("MicrosoftEdge")) {
             if (runmode.equalsIgnoreCase("remote")) {
                 // Remote WebDriver Logic to be Implemented
-                System.out.println("Remote WebDriver Logic....!!");
+                System.out.println("Remote WebDriver Logic - MicrosoftEdge!!");
+
+                EdgeOptions edgeOptions = new EdgeOptions();
+                edgeOptions.setCapability("browserName", browserName);
+                try {
+                    driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), edgeOptions);
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException(e);
+                }
+
             } else {
                 WebDriverManager.edgedriver().setup();
                 driver = new EdgeDriver();
