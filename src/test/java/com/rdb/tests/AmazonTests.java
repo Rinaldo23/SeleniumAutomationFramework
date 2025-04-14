@@ -14,20 +14,52 @@ public final class AmazonTests extends BaseTest {
     private AmazonTests() {
     }
 
-    @FrameworkAnnotation(authors = {"Rinaldo", "Pankaj"}, categories = {CategoryType.SMOKE, CategoryType.REGRESSION})
+    @FrameworkAnnotation(authors = {"Rinaldo"}, categories = {CategoryType.SMOKE, CategoryType.REGRESSION})
     @Test
-    public void navigateToTabletsPageViaHamburgerMenuTest(Map<String, String> m) {
+    public void navigateToTabletsPageViaHamburgerMenuTest(Map<String, String> data) {
         String pageTitle = new AmazonHomePage()
                 .openAllCategoriesHamburgerMenu()
-                .selectHamburgerMenuOption("Mobiles, Computers")
-                .selectHamburgerMenuSubOption("Tablets")
+                .selectHamburgerMenuOption(data.get("menuoption"))
+                .selectHamburgerMenuSubOption(data.get("submenuoption"))
                 .getPageTitle();
 
         assertThat(pageTitle)
                 .isNotBlank()
                 .isNotEmpty()
                 .isNotNull()
-                .containsIgnoringCase("Tablets");
+                .containsIgnoringCase(data.get("submenuoption"));
+    }
+
+    @FrameworkAnnotation(authors = {"Pankaj"}, categories = {CategoryType.SANITY, CategoryType.REGRESSION})
+    @Test
+    public void navigateToMensFashionPageViaHamburgerMenuTest(Map<String, String> data) {
+        String pageTitle = new AmazonHomePage()
+                .openAllCategoriesHamburgerMenu()
+                .selectHamburgerMenuOption(data.get("menuoption"))
+                .selectHamburgerMenuSubOption(data.get("submenuoption"))
+                .getPageTitle();
+
+        assertThat(pageTitle)
+                .isNotBlank()
+                .isNotEmpty()
+                .isNotNull()
+                .containsIgnoringCase(data.get("submenuoption"));
+    }
+
+    @FrameworkAnnotation(authors = {"Hrishi"}, categories = {CategoryType.SANITY, CategoryType.REGRESSION})
+    @Test
+    public void navigateToAmazonPrimeVideoPageViaHamburgerMenuTest(Map<String, String> data) {
+        String pageTitle = new AmazonHomePage()
+                .openAllCategoriesHamburgerMenu()
+                .selectHamburgerMenuOption(data.get("menuoption"))
+                .selectHamburgerMenuSubOption(data.get("submenuoption"))
+                .getPageTitle();
+
+        assertThat(pageTitle)
+                .isNotBlank()
+                .isNotEmpty()
+                .isNotNull()
+                .containsIgnoringCase(data.get("submenuoption"));
     }
 
 }

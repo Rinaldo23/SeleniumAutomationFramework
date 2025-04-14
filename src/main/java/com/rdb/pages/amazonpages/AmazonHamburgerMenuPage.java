@@ -10,9 +10,9 @@ import java.time.Duration;
 
 public final class AmazonHamburgerMenuPage extends BasePage {
 
-    private final String menuOption = "//div[text()='%s']/parent::a";
+    private final String menuOption = "//div[text()=\"%s\"]/parent::a";
 
-    private final String subMenuOption = "//a[text()='%s']";
+    private final String subMenuOption = "//a[text()=\"%s\"]";
 
     public AmazonHamburgerMenuPage selectHamburgerMenuOption(String optionName) {
         String hamburgerMenuOption = DynamicXpathUtils.getXpath(menuOption, optionName);

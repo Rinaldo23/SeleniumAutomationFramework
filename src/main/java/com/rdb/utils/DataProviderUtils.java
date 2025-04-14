@@ -15,7 +15,7 @@ public final class DataProviderUtils {
     private DataProviderUtils() {
     }
 
-    @DataProvider(name = "getData", parallel = true)
+    @DataProvider(name = "getData")
     public static Object[] getData(Method method) {
 
         String methodName = method.getName();

@@ -1,18 +1,14 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-<suite name="Suite" verbose="1" data-provider-thread-count="3">
+<suite name="Suite" verbose="1">
     <listeners>
         <listener class-name="com.rdb.listeners.TestListener"/>
         <listener class-name="com.rdb.listeners.MethodInterceptor"/>
         <listener class-name="com.rdb.listeners.AnnotationTransformer"/>
     </listeners>
-    <test name="OrangeHRMTest">
+    <test name="OrangeHRMTest" parallel="methods" thread-count="5">
         <classes>
             <class name="com.rdb.tests.AmazonTests"/>
-            <!--            <class name="com.rdb.tests.OrangeHRMTests"/>-->
-            <!--            <class name="com.rdb.tests.GoogleTests"/>-->
-            <!--            <class name="com.rdb.tests.LoginPageTests"/>-->
-            <!--            <class name="com.rdb.tests.HomePageTests"/>-->
         </classes>
     </test>
 </suite>
