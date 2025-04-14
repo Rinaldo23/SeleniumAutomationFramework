@@ -3,6 +3,7 @@ package com.rdb.listeners;
 import com.rdb.annotations.FrameworkAnnotation;
 import com.rdb.reports.ExtentLogger;
 import com.rdb.reports.ExtentReport;
+import com.rdb.utils.ELKUtils;
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
 import org.testng.ITestListener;
@@ -39,7 +40,7 @@ public final class TestListener implements ITestListener, ISuiteListener {
     @Override
     public void onTestSuccess(ITestResult result) {
         ExtentLogger.pass(result.getMethod().getMethodName() + "is passed!", true);
-//        ELKUtils.sendDetailsToElk(result.getMethod().getMethodName(), "PASS");
+        ELKUtils.sendDetailsToElk(result.getMethod().getMethodName(), "PASS");
     }
 
     @Override
@@ -47,12 +48,12 @@ public final class TestListener implements ITestListener, ISuiteListener {
         ExtentLogger.fail(result.getMethod().getMethodName() + "is failed!", true);
         ExtentLogger.fail(result.getThrowable().toString()); // Only TOP line failed message
         ExtentLogger.fail(Arrays.toString(result.getThrowable().getStackTrace()));
-//        ELKUtils.sendDetailsToElk(result.getMethod().getMethodName(), "FAIL");
+        ELKUtils.sendDetailsToElk(result.getMethod().getMethodName(), "FAIL");
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
         ExtentLogger.skip(result.getMethod().getMethodName() + "is skipped!", true);
-//        ELKUtils.sendDetailsToElk(result.getMethod().getMethodName(), "SKIP");
+        ELKUtils.sendDetailsToElk(result.getMethod().getMethodName(), "SKIP");
     }
 }

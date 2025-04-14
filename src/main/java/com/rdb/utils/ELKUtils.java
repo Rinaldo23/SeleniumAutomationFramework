@@ -21,6 +21,7 @@ public final class ELKUtils {
         map.put("executionTime", LocalDateTime.now().toString());
 
         Response response = given()
+                .log().all()
                 .contentType(ContentType.JSON)
                 .body(map)
                 .post("http://localhost:9200/automation-results/_doc");
