@@ -24,7 +24,7 @@ public final class ELKUtils {
                 .log().all()
                 .contentType(ContentType.JSON)
                 .body(map)
-                .post("http://localhost:9200/automation-results/_doc");
+                .post("http://localhost:9200/selenium-automation-logs/_doc");
 
         Assert.assertEquals(response.statusCode(), 201);
         response.prettyPrint();
