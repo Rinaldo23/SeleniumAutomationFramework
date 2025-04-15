@@ -30,4 +30,23 @@ public final class ELKUtils {
         response.prettyPrint();
     }
 
+    public static void deleteAllPreviousLogsFromIndex() {
+        String payload = """
+                {
+                    "query": {
+                        "match_all": {}
+                    }
+                }
+                """;
+
+        Response response = given()
+                .log().all()
+                .contentType(ContentType.JSON)
+                .body(payload)
+                .post("http://localhost:9200/selenium-automation-logs/_delete_by_query");
+
+        Assert.assertEquals(response.statusCode(), 200);
+        response.prettyPrint();
+    }
+
 }

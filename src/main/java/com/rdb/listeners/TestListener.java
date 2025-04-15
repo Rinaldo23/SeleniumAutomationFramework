@@ -16,6 +16,7 @@ public final class TestListener implements ITestListener, ISuiteListener {
 
     @Override
     public void onStart(ISuite suite) {
+        ELKUtils.deleteAllPreviousLogsFromIndex();
         ExtentReport.initReports();
     }
 
