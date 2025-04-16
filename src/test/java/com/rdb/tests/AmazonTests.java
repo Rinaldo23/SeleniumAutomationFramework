@@ -2,7 +2,8 @@ package com.rdb.tests;
 
 import com.rdb.annotations.FrameworkAnnotation;
 import com.rdb.enums.CategoryType;
-import com.rdb.pages.amazonpages.AmazonHomePage;
+import com.rdb.interactions.Interactions;
+import com.rdb.pages.AmazonHomePage;
 import org.testng.annotations.Test;
 
 import java.util.Map;
@@ -17,7 +18,7 @@ public final class AmazonTests extends BaseTest {
     @FrameworkAnnotation(authors = {"Rinaldo"}, categories = {CategoryType.SMOKE, CategoryType.REGRESSION})
     @Test
     public void navigateToTabletsPageViaHamburgerMenuTest(Map<String, String> data) {
-        String pageTitle = new AmazonHomePage()
+        String pageTitle = new AmazonHomePage(new Interactions())
                 .openAllCategoriesHamburgerMenu()
                 .selectHamburgerMenuOption(data.get("menuoption"))
                 .selectHamburgerMenuSubOption(data.get("submenuoption"))
@@ -33,7 +34,7 @@ public final class AmazonTests extends BaseTest {
     @FrameworkAnnotation(authors = {"Pankaj"}, categories = {CategoryType.SANITY, CategoryType.REGRESSION})
     @Test
     public void navigateToMensFashionPageViaHamburgerMenuTest(Map<String, String> data) {
-        String pageTitle = new AmazonHomePage()
+        String pageTitle = new AmazonHomePage(new Interactions())
                 .openAllCategoriesHamburgerMenu()
                 .selectHamburgerMenuOption(data.get("menuoption"))
                 .selectHamburgerMenuSubOption(data.get("submenuoption"))
@@ -49,7 +50,7 @@ public final class AmazonTests extends BaseTest {
     @FrameworkAnnotation(authors = {"Hrishi"}, categories = {CategoryType.SANITY, CategoryType.REGRESSION})
     @Test
     public void navigateToAmazonPrimeVideoPageViaHamburgerMenuTest(Map<String, String> data) {
-        String pageTitle = new AmazonHomePage()
+        String pageTitle = new AmazonHomePage(new Interactions())
                 .openAllCategoriesHamburgerMenu()
                 .selectHamburgerMenuOption(data.get("menuoption"))
                 .selectHamburgerMenuSubOption(data.get("submenuoption"))

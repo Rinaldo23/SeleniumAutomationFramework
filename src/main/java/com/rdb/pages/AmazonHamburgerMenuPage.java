@@ -1,8 +1,8 @@
-package com.rdb.pages.amazonpages;
+package com.rdb.pages;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.rdb.enums.WaitStrategy;
-import com.rdb.pages.BasePage;
+import com.rdb.interactions.Interactions;
 import com.rdb.utils.DynamicXpathUtils;
 import org.openqa.selenium.By;
 
@@ -14,16 +14,20 @@ public final class AmazonHamburgerMenuPage extends BasePage {
 
     private final String subMenuOption = "//a[text()=\"%s\"]";
 
+    public AmazonHamburgerMenuPage(Interactions interactions) {
+        super(interactions);
+    }
+
     public AmazonHamburgerMenuPage selectHamburgerMenuOption(String optionName) {
         String hamburgerMenuOption = DynamicXpathUtils.getXpath(menuOption, optionName);
-        click(By.xpath(hamburgerMenuOption), optionName, WaitStrategy.CLICKABLE);
+        interactions.click(By.xpath(hamburgerMenuOption), optionName, WaitStrategy.CLICKABLE);
         Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(3));
         return this;
     }
 
     public AmazonTabletsPage selectHamburgerMenuSubOption(String subOptionName) {
         String hamburgerSubMenuOption = DynamicXpathUtils.getXpath(subMenuOption, subOptionName);
-        mouseHoverAndClick(By.xpath(hamburgerSubMenuOption), subOptionName, WaitStrategy.CLICKABLE);
-        return new AmazonTabletsPage();
+        interactions.mouseHoverAndClick(By.xpath(hamburgerSubMenuOption), subOptionName, WaitStrategy.CLICKABLE);
+        return new AmazonTabletsPage(interactions);
     }
 }

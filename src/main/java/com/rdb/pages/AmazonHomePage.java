@@ -1,8 +1,8 @@
-package com.rdb.pages.amazonpages;
+package com.rdb.pages;
 
 import com.rdb.driver.DriverManager;
 import com.rdb.enums.WaitStrategy;
-import com.rdb.pages.BasePage;
+import com.rdb.interactions.Interactions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -19,7 +19,8 @@ public final class AmazonHomePage extends BasePage {
     @FindBy(xpath = "//a[@id='nav-hamburger-menu' and @role='button']")
     private WebElement btnHamburgerMenu;
 
-    public AmazonHomePage() {
+    public AmazonHomePage(Interactions interactions) {
+        super(interactions);
         PageFactory.initElements(DriverManager.getDriver(), this);
     }
 
@@ -33,8 +34,8 @@ public final class AmazonHomePage extends BasePage {
 //        if (!btnHamburgerMenu.isDisplayed()) {
 //            refreshPage();
 //        }
-        click(btnHamburgerMenu, "All Categories Menu", WaitStrategy.CLICKABLE);
-        return new AmazonHamburgerMenuPage();
+        interactions.click(btnHamburgerMenu, "All Categories Menu", WaitStrategy.CLICKABLE);
+        return new AmazonHamburgerMenuPage(interactions);
     }
 }
 
