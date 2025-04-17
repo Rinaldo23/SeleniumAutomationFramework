@@ -10,9 +10,9 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public final class AmazonTests extends BaseTest {
+public final class AmazonHamburgerMenuTests extends BaseTest {
 
-    private AmazonTests() {
+    private AmazonHamburgerMenuTests() {
     }
 
     @FrameworkAnnotation(authors = {"Rinaldo"}, categories = {CategoryType.SMOKE, CategoryType.REGRESSION})
