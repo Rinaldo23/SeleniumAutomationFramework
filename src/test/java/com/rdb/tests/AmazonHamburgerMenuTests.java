@@ -63,4 +63,17 @@ public final class AmazonHamburgerMenuTests extends BaseTest {
                 .containsIgnoringCase(data.get("submenuoption"));
     }
 
+    @FrameworkAnnotation(authors = {"Rinaldo"}, categories = {CategoryType.SANITY})
+    @Test
+    public void verifyAmazonHomePageTitle(Map<String, String> data) {
+        String pageTitle = new AmazonHomePage(new Interactions())
+                .openAllCategoriesHamburgerMenu()
+                .getPageTitle();
+
+        assertThat(pageTitle)
+                .isNotBlank()
+                .isNotEmpty()
+                .isNotNull();
+    }
+
 }
