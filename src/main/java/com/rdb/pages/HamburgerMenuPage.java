@@ -8,26 +8,26 @@ import org.openqa.selenium.By;
 
 import java.time.Duration;
 
-public final class AmazonHamburgerMenuPage extends BasePage {
+public final class HamburgerMenuPage extends BasePage {
 
     private final String menuOption = "//div[text()=\"%s\"]/parent::a";
 
     private final String subMenuOption = "//a[text()=\"%s\"]";
 
-    public AmazonHamburgerMenuPage(Interactions interactions) {
+    public HamburgerMenuPage(Interactions interactions) {
         super(interactions);
     }
 
-    public AmazonHamburgerMenuPage selectHamburgerMenuOption(String optionName) {
+    public HamburgerMenuPage selectHamburgerMenuOption(String optionName) {
         String hamburgerMenuOption = DynamicXpathUtils.getXpath(menuOption, optionName);
         interactions.click(By.xpath(hamburgerMenuOption), optionName, WaitStrategy.CLICKABLE);
         Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(3));
         return this;
     }
 
-    public AmazonTabletsPage selectHamburgerMenuSubOption(String subOptionName) {
+    public TabletsPage selectHamburgerMenuSubOption(String subOptionName) {
         String hamburgerSubMenuOption = DynamicXpathUtils.getXpath(subMenuOption, subOptionName);
         interactions.mouseHoverAndClick(By.xpath(hamburgerSubMenuOption), subOptionName, WaitStrategy.CLICKABLE);
-        return new AmazonTabletsPage(interactions);
+        return new TabletsPage(interactions);
     }
 }

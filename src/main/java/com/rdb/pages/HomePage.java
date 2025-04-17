@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public final class AmazonHomePage extends BasePage {
+public final class HomePage extends BasePage {
 
     /* Older way of using @FindBy in Selenium 2 & early Selenium 3 - It is Deprecated */
     /* @FindBy(how = How.ID, using = "nav-logo-sprites")
@@ -19,7 +19,7 @@ public final class AmazonHomePage extends BasePage {
     @FindBy(xpath = "//a[@id='nav-hamburger-menu' and @role='button']")
     private WebElement btnHamburgerMenu;
 
-    public AmazonHomePage(Interactions interactions) {
+    public HomePage(Interactions interactions) {
         super(interactions);
         PageFactory.initElements(DriverManager.getDriver(), this);
     }
@@ -30,12 +30,12 @@ public final class AmazonHomePage extends BasePage {
         return amazonLogo;
     }
 
-    public AmazonHamburgerMenuPage openAllCategoriesHamburgerMenu() {
+    public HamburgerMenuPage openAllCategoriesHamburgerMenu() {
 //        if (!btnHamburgerMenu.isDisplayed()) {
 //            refreshPage();
 //        }
         interactions.click(btnHamburgerMenu, "All Categories Menu", WaitStrategy.CLICKABLE);
-        return new AmazonHamburgerMenuPage(interactions);
+        return new HamburgerMenuPage(interactions);
     }
 }
 
