@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import java.time.Duration;
+import java.util.List;
 
 import static com.rdb.factories.ExplicitWaitFactory.performExplicitWait;
 
@@ -42,6 +43,21 @@ public final class Interactions {
         ExtentLogger.pass("Successfully clicked on " + elementName + " using Actions Class", false);
     }
 
+    public void mouseHover(By locator, String elementName, WaitStrategy waitStrategy) {
+        WebElement element = DriverManager.getDriver().findElement(locator);
+        mouseHover(element, elementName, waitStrategy);
+    }
+
+    public void mouseHover(WebElement element, String elementName, WaitStrategy waitStrategy) {
+        WebElement webElement = performExplicitWait(element, waitStrategy);
+        new Actions(DriverManager.getDriver())
+                .scrollToElement(webElement)
+                .moveToElement(webElement)
+                .perform();
+        Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(5));
+        ExtentLogger.pass("Successfully hovered on " + elementName + " using Actions Class", false);
+    }
+
     public void mouseHoverAndClick(By locator, String elementName, WaitStrategy waitStrategy) {
         WebElement element = DriverManager.getDriver().findElement(locator);
         mouseHoverAndClick(element, elementName, waitStrategy);
@@ -68,5 +84,12 @@ public final class Interactions {
         WebElement element = DriverManager.getDriver().findElement(locator);
         return isElementPresent(element, waitStrategy);
     }
+
+    public List<WebElement> getListOfELements(By locator, WaitStrategy waitStrategy) {
+        performExplicitWait(DriverManager.getDriver().findElement(locator), waitStrategy);
+        return DriverManager.getDriver().findElements(locator);
+    }
+
+//    public get
 
 }

@@ -41,4 +41,22 @@ public final class AmazonHeaderTests extends BaseTest {
                 .isNotNull()
                 .containsIgnoringCase(data.get("productname"));
     }
+
+    @FrameworkAnnotation(authors = {"Rinaldo"}, categories = {CategoryType.REGRESSION})
+    @Test
+    public void selectLanguageUsignQuickView(Map<String, String> data) {
+
+        String currentUrl = dependencies.HomePage()
+                .getPageUrl();
+
+        String newUrl = dependencies.HeaderPage()
+                .selectLanguageAtRandom()
+                .getPageUrl();
+
+        assertThat(newUrl)
+                .isNotNull()
+                .isNotBlank()
+                .isNotEqualTo(currentUrl);
+        
+    }
 }

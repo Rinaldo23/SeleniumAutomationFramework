@@ -9,6 +9,7 @@
     <test name="AmazonTests">
         <classes>
             <class name="com.rdb.tests.AmazonHamburgerMenuTests"/>
+            <class name="com.rdb.tests.AmazonHeaderTests"/>
         </classes>
     </test>
 </suite>
