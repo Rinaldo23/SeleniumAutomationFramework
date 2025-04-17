@@ -52,7 +52,7 @@ public final class Interactions {
         if (elementIsInteractable(webElement)) {
             webElement.sendKeys(text);
         }
-        ExtentLogger.pass("Text box value set to " + text, true);
+        ExtentLogger.pass("Text box value set to " + text, false);
     }
 
     public void setTextBoxValue(By locator, String text, WaitStrategy waitStrategy) {

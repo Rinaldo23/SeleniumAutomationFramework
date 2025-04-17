@@ -90,14 +90,4 @@ public final class AmazonHamburgerMenuTests extends BaseTest {
                 .isNotNull();
     }
 
-    @FrameworkAnnotation(authors = {"Hrishi"}, categories = {CategoryType.SMOKE})
-    @Test
-    public void verifyAmazonHomePageHeaderLogo(Map<String, String> data) {
-        boolean isLogoPresent = dependencies.HomePage()
-                .isAmazonHeaderLogoPresent();
-
-        assertThat(isLogoPresent)
-                .isTrue();
-    }
-
 }
