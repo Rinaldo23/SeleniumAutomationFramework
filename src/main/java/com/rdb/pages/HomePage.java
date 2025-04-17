@@ -3,8 +3,7 @@ package com.rdb.pages;
 import com.rdb.driver.DriverManager;
 import com.rdb.enums.WaitStrategy;
 import com.rdb.interactions.Interactions;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 
 public final class HomePage extends BasePage {
@@ -13,27 +12,26 @@ public final class HomePage extends BasePage {
     /* @FindBy(how = How.ID, using = "nav-logo-sprites")
     private WebElement amazonLogo; */
 
-    @FindBy(id = "nav-logo-sprites")
+    /* @FindBy(id = "nav-logo-sprites")
     private WebElement amazonLogo;
 
     @FindBy(xpath = "//a[@id='nav-hamburger-menu' and @role='button']")
-    private WebElement btnHamburgerMenu;
+    private WebElement btnHamburgerMenu; */
+
+    private final By amazonLogo = By.id("nav-logo-sprites");
+
+    private final By btnHamburgerMenu = By.xpath("//a[@id='nav-hamburger-menu' and @role='button']");
 
     public HomePage(Interactions interactions) {
         super(interactions);
         PageFactory.initElements(DriverManager.getDriver(), this);
     }
 
-    /* ============================================================================================================== */
-
-    public WebElement getAmazonHeaderLogo() {
-        return amazonLogo;
+    public boolean isAmazonHeaderLogoPresent() {
+        return interactions.isElementPresent(amazonLogo, WaitStrategy.VISIBLE);
     }
 
     public HamburgerMenuPage openAllCategoriesHamburgerMenu() {
-//        if (!btnHamburgerMenu.isDisplayed()) {
-//            refreshPage();
-//        }
         interactions.click(btnHamburgerMenu, "All Categories Menu", WaitStrategy.CLICKABLE);
         return new HamburgerMenuPage(interactions);
     }

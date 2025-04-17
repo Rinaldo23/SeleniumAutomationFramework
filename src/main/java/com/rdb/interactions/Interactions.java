@@ -13,7 +13,7 @@ import java.time.Duration;
 import static com.rdb.factories.ExplicitWaitFactory.performExplicitWait;
 
 public final class Interactions {
-    
+
     private boolean elementIsInteractable(WebElement element) {
         return element.isDisplayed() && element.isEnabled();
     }
@@ -58,6 +58,16 @@ public final class Interactions {
     public void setTextBoxValue(By locator, String text, WaitStrategy waitStrategy) {
         WebElement element = DriverManager.getDriver().findElement(locator);
         setTextBoxValue(element, text, waitStrategy);
+    }
+
+    public boolean isElementPresent(WebElement element, WaitStrategy waitStrategy) {
+        WebElement webElement = performExplicitWait(element, waitStrategy);
+        return element.isDisplayed() && element.isEnabled();
+    }
+
+    public boolean isElementPresent(By locator, WaitStrategy waitStrategy) {
+        WebElement element = DriverManager.getDriver().findElement(locator);
+        return isElementPresent(element, waitStrategy);
     }
 
 }
