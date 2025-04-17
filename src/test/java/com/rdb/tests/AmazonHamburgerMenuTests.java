@@ -23,8 +23,11 @@ public final class AmazonHamburgerMenuTests extends BaseTest {
     @FrameworkAnnotation(authors = {"Rinaldo"}, categories = {CategoryType.SMOKE, CategoryType.REGRESSION})
     @Test
     public void navigateToTabletsPageViaHamburgerMenuTest(Map<String, String> data) {
-        String pageTitle = new HomePage(new Interactions())
-                .openAllCategoriesHamburgerMenu()
+
+        dependencies.HomePage()
+                .openAllCategoriesHamburgerMenu();
+
+        String pageTitle = dependencies.HamburgerMenuPage()
                 .selectHamburgerMenuOption(data.get("menuoption"))
                 .selectHamburgerMenuSubOption(data.get("submenuoption"))
                 .getPageTitle();
@@ -39,8 +42,11 @@ public final class AmazonHamburgerMenuTests extends BaseTest {
     @FrameworkAnnotation(authors = {"Pankaj"}, categories = {CategoryType.SANITY, CategoryType.REGRESSION})
     @Test
     public void navigateToMensFashionPageViaHamburgerMenuTest(Map<String, String> data) {
-        String pageTitle = new HomePage(new Interactions())
-                .openAllCategoriesHamburgerMenu()
+
+        dependencies.HomePage()
+                .openAllCategoriesHamburgerMenu();
+
+        String pageTitle = dependencies.HamburgerMenuPage()
                 .selectHamburgerMenuOption(data.get("menuoption"))
                 .selectHamburgerMenuSubOption(data.get("submenuoption"))
                 .getPageTitle();
@@ -55,8 +61,11 @@ public final class AmazonHamburgerMenuTests extends BaseTest {
     @FrameworkAnnotation(authors = {"Hrishi"}, categories = {CategoryType.SANITY, CategoryType.REGRESSION})
     @Test
     public void navigateToAmazonPrimeVideoPageViaHamburgerMenuTest(Map<String, String> data) {
-        String pageTitle = new HomePage(new Interactions())
-                .openAllCategoriesHamburgerMenu()
+
+        dependencies.HomePage()
+                .openAllCategoriesHamburgerMenu();
+
+        String pageTitle = dependencies.HamburgerMenuPage()
                 .selectHamburgerMenuOption(data.get("menuoption"))
                 .selectHamburgerMenuSubOption(data.get("submenuoption"))
                 .getPageTitle();

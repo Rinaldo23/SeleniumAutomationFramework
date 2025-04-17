@@ -61,8 +61,7 @@ public final class Interactions {
     }
 
     public boolean isElementPresent(WebElement element, WaitStrategy waitStrategy) {
-        WebElement webElement = performExplicitWait(element, waitStrategy);
-        return element.isDisplayed() && element.isEnabled();
+        return performExplicitWait(element, waitStrategy).isDisplayed();
     }
 
     public boolean isElementPresent(By locator, WaitStrategy waitStrategy) {

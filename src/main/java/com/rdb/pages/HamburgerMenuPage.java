@@ -25,9 +25,9 @@ public final class HamburgerMenuPage extends BasePage {
         return this;
     }
 
-    public TabletsPage selectHamburgerMenuSubOption(String subOptionName) {
+    public HamburgerMenuPage selectHamburgerMenuSubOption(String subOptionName) {
         String hamburgerSubMenuOption = DynamicXpathUtils.getXpath(subMenuOption, subOptionName);
         interactions.mouseHoverAndClick(By.xpath(hamburgerSubMenuOption), subOptionName, WaitStrategy.CLICKABLE);
-        return new TabletsPage(interactions);
+        return this;
     }
 }

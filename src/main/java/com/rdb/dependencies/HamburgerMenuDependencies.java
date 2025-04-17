@@ -3,20 +3,17 @@ package com.rdb.dependencies;
 import com.rdb.interactions.Interactions;
 import com.rdb.pages.HamburgerMenuPage;
 import com.rdb.pages.HomePage;
-import com.rdb.pages.TabletsPage;
 
 public class HamburgerMenuDependencies implements IHamburgerMenuDependencies {
 
     private final Interactions interactions;
     private final HomePage homePage;
     private final HamburgerMenuPage hamburgerMenuPage;
-    private final TabletsPage tabletsPage;
 
     public HamburgerMenuDependencies() {
         this.interactions = new Interactions();
         this.hamburgerMenuPage = new HamburgerMenuPage(interactions);
         this.homePage = new HomePage(interactions);
-        this.tabletsPage = new TabletsPage(interactions);
     }
 
     @Override
@@ -28,9 +25,5 @@ public class HamburgerMenuDependencies implements IHamburgerMenuDependencies {
     public HamburgerMenuPage HamburgerMenuPage() {
         return hamburgerMenuPage;
     }
-
-    @Override
-    public TabletsPage TabletsPage() {
-        return tabletsPage;
-    }
+    
 }
