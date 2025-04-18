@@ -31,6 +31,7 @@ public final class HomePage extends BasePage {
 
     public HomePage openAllCategoriesHamburgerMenu() {
         interactions.click(btnHamburgerMenu, "All Categories Menu", WaitStrategy.CLICKABLE);
+        interactions.waitForAjaxCalls(10);
         return this;
     }
 }

@@ -2,14 +2,19 @@ package com.rdb.interactions;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.rdb.driver.DriverManager;
+import com.rdb.enums.ConfigProperties;
 import com.rdb.enums.WaitStrategy;
 import com.rdb.reports.ExtentLogger;
+import com.rdb.utils.PropertyUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Objects;
 
 import static com.rdb.factories.ExplicitWaitFactory.performExplicitWait;
 
@@ -90,6 +95,63 @@ public final class Interactions {
         return DriverManager.getDriver().findElements(locator);
     }
 
-//    public get
+    /*
+    * What this handles:
+        - If jQuery is not present, it won’t crash (returns true and skips).
+        - If jQuery is present, it waits until all active AJAX calls are done (jQuery.active == 0).
+    */
+    public void waitForAjaxCalls(int maxWaitTime) {
+        int waitTime = (maxWaitTime == 0) ? Integer.parseInt(PropertyUtils.getValue(ConfigProperties.SELENIUMCOMMANDTIMEOUT)) : maxWaitTime;
+
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(waitTime));
+        wait.until(driver -> {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            try {
+                return (Boolean) js.executeScript("return window.jQuery === undefined || jQuery.active === 0;");
+            } catch (Exception e) {
+                // Optional: log warning if needed
+                return true; // Fail-safe: proceed if jQuery not available
+            }
+        });
+    }
+
+    public void waitForPageLoad(int maxWaitTimeInSeconds) {
+        int waitTime = (maxWaitTimeInSeconds == 0)
+                ? Integer.parseInt(PropertyUtils.getValue(ConfigProperties.PAGELOADWAITTIME))
+                : maxWaitTimeInSeconds;
+
+        try {
+            /* new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(waitTime))
+                    .until(driver -> ((JavascriptExecutor) driver)
+                            .executeScript("return document.readyState")
+                            .equals("complete"));*/
+
+            new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(waitTime))
+                    .until(driver -> Objects.equals(((JavascriptExecutor) driver)
+                            .executeScript("return document.readyState"), "complete"));
+        } catch (Exception e) {
+//            logger.error("Page load wait failed after {} seconds", waitTime, e);
+//            takeScreenshot(); // your method
+            ((JavascriptExecutor) DriverManager.getDriver())
+                    .executeScript("window.stop();");
+            throw e;
+        }
+    }
+
+    public void ensurePageIsFullyLoaded(int maxWaitTimeInSec) {
+        int waitTime = (maxWaitTimeInSec == 0)
+                ? Integer.parseInt(PropertyUtils.getValue(ConfigProperties.SELENIUMCOMMANDTIMEOUT))
+                : maxWaitTimeInSec;
+
+        try {
+            waitForPageLoad(waitTime);   // Ensure full page load
+            waitForAjaxCalls(waitTime);  // Ensure all AJAX calls are complete
+        } catch (Exception e) {
+//            logger.error("⚠️ ensurePageIsFullyLoaded failed.", e);
+//            screenshotService.AddExceptionToTestResult("Page load failure: " + e.getMessage());
+            throw e;  // Throwing exception to halt test in case of failure
+        }
+    }
+
 
 }

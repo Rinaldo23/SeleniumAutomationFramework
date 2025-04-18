@@ -1,12 +1,10 @@
 package com.rdb.pages;
 
-import com.google.common.util.concurrent.Uninterruptibles;
 import com.rdb.enums.WaitStrategy;
 import com.rdb.interactions.Interactions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -28,7 +26,8 @@ public final class HeaderPage extends BasePage {
     public HeaderPage searchForProduct(String productName) {
         interactions.setTextBoxValue(searchTxtBox, productName, WaitStrategy.CLICKABLE);
         interactions.click(searchBtn, "searchBtn", WaitStrategy.CLICKABLE);
-        Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(5));
+        /* Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(5)); */
+        interactions.ensurePageIsFullyLoaded(20);
         return this;
     }
 
@@ -44,7 +43,8 @@ public final class HeaderPage extends BasePage {
                 break;
             }
         }
-        Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(5));
+        /* Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(5)); */
+        interactions.ensurePageIsFullyLoaded(20);
         return this;
     }
 }

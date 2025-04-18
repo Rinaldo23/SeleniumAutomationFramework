@@ -1,12 +1,9 @@
 package com.rdb.pages;
 
-import com.google.common.util.concurrent.Uninterruptibles;
 import com.rdb.enums.WaitStrategy;
 import com.rdb.interactions.Interactions;
 import com.rdb.utils.DynamicXpathUtils;
 import org.openqa.selenium.By;
-
-import java.time.Duration;
 
 public final class HamburgerMenuPage extends BasePage {
 
@@ -21,13 +18,15 @@ public final class HamburgerMenuPage extends BasePage {
     public HamburgerMenuPage selectHamburgerMenuOption(String optionName) {
         String hamburgerMenuOption = DynamicXpathUtils.getXpath(menuOption, optionName);
         interactions.click(By.xpath(hamburgerMenuOption), optionName, WaitStrategy.CLICKABLE);
-        Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(3));
+        /* Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(5)); */
+        interactions.ensurePageIsFullyLoaded(10);
         return this;
     }
 
     public HamburgerMenuPage selectHamburgerMenuSubOption(String subOptionName) {
         String hamburgerSubMenuOption = DynamicXpathUtils.getXpath(subMenuOption, subOptionName);
         interactions.mouseHoverAndClick(By.xpath(hamburgerSubMenuOption), subOptionName, WaitStrategy.CLICKABLE);
+        interactions.ensurePageIsFullyLoaded(10);
         return this;
     }
 }
