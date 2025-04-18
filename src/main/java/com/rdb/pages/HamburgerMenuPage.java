@@ -1,7 +1,7 @@
 package com.rdb.pages;
 
 import com.rdb.enums.WaitStrategy;
-import com.rdb.interactions.Interactions;
+import com.rdb.pages.interactions.InteractionService;
 import com.rdb.utils.DynamicXpathUtils;
 import org.openqa.selenium.By;
 
@@ -11,7 +11,7 @@ public final class HamburgerMenuPage extends BasePage {
 
     private final String subMenuOption = "//a[text()=\"%s\"]";
 
-    public HamburgerMenuPage(Interactions interactions) {
+    public HamburgerMenuPage(InteractionService interactions) {
         super(interactions);
     }
 

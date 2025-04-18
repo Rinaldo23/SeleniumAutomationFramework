@@ -1,7 +1,7 @@
 package com.rdb.dependencies;
 
-import com.rdb.interactions.Interactions;
 import com.rdb.pages.HomePage;
+import com.rdb.pages.interactions.InteractionService;
 
 public class BaseDependencies implements IBaseDependencies {
 
@@ -13,16 +13,16 @@ public class BaseDependencies implements IBaseDependencies {
      */
 
     /* protected allows subclasses to use these objects */
-    protected final Interactions interactions;
+    protected final InteractionService interactions;
     protected final HomePage homePage;
 
     public BaseDependencies() {
-        this.interactions = new Interactions();
+        this.interactions = new InteractionService();
         this.homePage = new HomePage(interactions);
     }
 
     @Override
-    public Interactions interactions() {
+    public InteractionService interactions() {
         return interactions;
     }
 

@@ -1,4 +1,4 @@
-package com.rdb.interactions;
+package com.rdb.pages.interactions;
 
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.rdb.driver.DriverManager;
@@ -18,7 +18,7 @@ import java.util.Objects;
 
 import static com.rdb.factories.ExplicitWaitFactory.performExplicitWait;
 
-public final class Interactions {
+public final class InteractionService {
 
     private boolean elementIsInteractable(WebElement element) {
         return element.isDisplayed() && element.isEnabled();

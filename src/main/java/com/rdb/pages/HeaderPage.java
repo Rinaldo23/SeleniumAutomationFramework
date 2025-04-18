@@ -1,7 +1,7 @@
 package com.rdb.pages;
 
 import com.rdb.enums.WaitStrategy;
-import com.rdb.interactions.Interactions;
+import com.rdb.pages.interactions.InteractionService;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -19,7 +19,7 @@ public final class HeaderPage extends BasePage {
     private final By listOfLangBtn = By.xpath("//div[@id='nav-flyout-icp']/child::div[contains(@class, 'itemList')]/a[contains(@lang,'-')]");
 
 
-    public HeaderPage(Interactions interactions) {
+    public HeaderPage(InteractionService interactions) {
         super(interactions);
     }
 

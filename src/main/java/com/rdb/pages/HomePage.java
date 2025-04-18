@@ -1,7 +1,7 @@
 package com.rdb.pages;
 
 import com.rdb.enums.WaitStrategy;
-import com.rdb.interactions.Interactions;
+import com.rdb.pages.interactions.InteractionService;
 import org.openqa.selenium.By;
 
 public final class HomePage extends BasePage {
@@ -20,7 +20,7 @@ public final class HomePage extends BasePage {
 
     private final By btnHamburgerMenu = By.xpath("//a[@id='nav-hamburger-menu' and @role='button']");
 
-    public HomePage(Interactions interactions) {
+    public HomePage(InteractionService interactions) {
         super(interactions);
         /* PageFactory.initElements(DriverManager.getDriver(), this); */
     }

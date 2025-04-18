@@ -1,11 +1,11 @@
 package com.rdb.dependencies;
 
-import com.rdb.interactions.Interactions;
 import com.rdb.pages.HomePage;
+import com.rdb.pages.interactions.InteractionService;
 
 public interface IBaseDependencies {
 
-    Interactions interactions();
+    InteractionService interactions();
 
     HomePage HomePage();
 }
