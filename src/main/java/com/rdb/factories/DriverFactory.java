@@ -9,12 +9,14 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxDriverLogLevel;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.logging.Level;
 
 public final class DriverFactory {
 
@@ -31,6 +33,8 @@ public final class DriverFactory {
         chromeOptions.setExperimentalOption("excludeSwitches", List.of("enable-automation")); // Hides Selenium usage
         chromeOptions.setExperimentalOption("useAutomationExtension", false);
 
+        chromeOptions.addArguments("--headless");
+
         if (browserName.equalsIgnoreCase("chrome")) {
             if (runmode.equalsIgnoreCase("remote")) {
                 // Remote WebDriver Logic to be Implemented
@@ -46,21 +50,28 @@ public final class DriverFactory {
                 driver = new ChromeDriver(chromeOptions);
             }
         } else if (browserName.equalsIgnoreCase("firefox")) {
-            if (runmode.equalsIgnoreCase("remote")) {
-                // Remote WebDriver Logic to be Implemented
-                System.out.println("Remote WebDriver Logic - Firefox!!");
+            // Suppress geckodriver and Firefox internal logs
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
 
-                FirefoxOptions firefoxOptions = new FirefoxOptions();
-                firefoxOptions.setCapability("browserName", browserName);
+            // Set Firefox logging level to "OFF" to suppress logs
+            firefoxOptions.addPreference("webdriver.log.file", "/dev/null"); // For Linux/macOS
+            // For Windows
+            firefoxOptions.addPreference("webdriver.log.file", "NUL");
+
+            // Set log level to severe (optional, based on your needs)
+            firefoxOptions.setLogLevel(FirefoxDriverLogLevel.fromLevel(Level.SEVERE));
+
+            if (runmode.equalsIgnoreCase("remote")) {
+                System.out.println("Remote WebDriver Logic - Firefox!!");
                 try {
                     driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), firefoxOptions);
                 } catch (MalformedURLException e) {
                     throw new RuntimeException(e);
                 }
-
             } else {
                 WebDriverManager.firefoxdriver().setup();
-                driver = new FirefoxDriver();
+                firefoxOptions.addArguments("--headless");
+                driver = new FirefoxDriver(firefoxOptions);
             }
         } else if (browserName.equalsIgnoreCase("MicrosoftEdge")) {
             if (runmode.equalsIgnoreCase("remote")) {
@@ -77,7 +88,9 @@ public final class DriverFactory {
 
             } else {
                 WebDriverManager.edgedriver().setup();
-                driver = new EdgeDriver();
+                EdgeOptions edgeOptions = new EdgeOptions();
+                edgeOptions.addArguments("--headless");
+                driver = new EdgeDriver(edgeOptions);
             }
         }
         return driver;
