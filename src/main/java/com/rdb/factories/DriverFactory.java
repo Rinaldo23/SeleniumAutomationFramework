@@ -14,7 +14,8 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -41,8 +42,9 @@ public final class DriverFactory {
                 System.out.println("Remote WebDriver Logic - Chrome!!");
                 chromeOptions.setCapability("browserName", browserName);
                 try {
-                    driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
-                } catch (MalformedURLException e) {
+                    /* driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions); */
+                    driver = new RemoteWebDriver(new URI("http://localhost:4444/wd/hub").toURL(), chromeOptions);
+                } catch (MalformedURLException | URISyntaxException e) {
                     throw new RuntimeException(e);
                 }
             } else {
@@ -64,8 +66,9 @@ public final class DriverFactory {
             if (runmode.equalsIgnoreCase("remote")) {
                 System.out.println("Remote WebDriver Logic - Firefox!!");
                 try {
-                    driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), firefoxOptions);
-                } catch (MalformedURLException e) {
+                    /* driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions); */
+                    driver = new RemoteWebDriver(new URI("http://localhost:4444/wd/hub").toURL(), firefoxOptions);
+                } catch (MalformedURLException | URISyntaxException e) {
                     throw new RuntimeException(e);
                 }
             } else {
@@ -81,8 +84,9 @@ public final class DriverFactory {
                 EdgeOptions edgeOptions = new EdgeOptions();
                 edgeOptions.setCapability("browserName", browserName);
                 try {
-                    driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), edgeOptions);
-                } catch (MalformedURLException e) {
+                    /* driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions); */
+                    driver = new RemoteWebDriver(new URI("http://localhost:4444/wd/hub").toURL(), edgeOptions);
+                } catch (MalformedURLException | URISyntaxException e) {
                     throw new RuntimeException(e);
                 }
 
