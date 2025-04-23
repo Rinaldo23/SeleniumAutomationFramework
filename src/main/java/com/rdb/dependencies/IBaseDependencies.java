@@ -5,7 +5,7 @@ import com.rdb.pages.interactions.InteractionService;
 
 public interface IBaseDependencies {
 
-    InteractionService interactions();
+    InteractionService Interactions();
 
     HomePage HomePage();
 }

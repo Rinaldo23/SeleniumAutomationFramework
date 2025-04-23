@@ -6,9 +6,13 @@
         <listener class-name="com.rdb.listeners.MethodInterceptor"/>
         <listener class-name="com.rdb.listeners.AnnotationTransformer"/>
     </listeners>
-    <test name="AmazonTests">
+    <test name="Hamburger Menu Tests">
         <classes>
             <class name="com.rdb.tests.AmazonHamburgerMenuTests"/>
+        </classes>
+    </test>
+    <test name="Header Tests">
+        <classes>
             <class name="com.rdb.tests.AmazonHeaderTests"/>
         </classes>
     </test>

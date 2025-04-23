@@ -22,7 +22,7 @@ public class BaseDependencies implements IBaseDependencies {
     }
 
     @Override
-    public InteractionService interactions() {
+    public InteractionService Interactions() {
         return interactions;
     }
 
