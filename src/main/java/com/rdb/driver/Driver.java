@@ -17,14 +17,24 @@ public final class Driver {
         if (Objects.isNull(DriverManager.getDriver())) {
 
             if (browserName.equalsIgnoreCase("chrome")) {
-                DriverManager.setDriver(DriverFactory.getDriver(browserName));
+                DriverManager.setDriver(DriverFactory.getDriverOptimized(browserName));
             } else if (browserName.equalsIgnoreCase("firefox")) {
-                DriverManager.setDriver(DriverFactory.getDriver(browserName));
+                DriverManager.setDriver(DriverFactory.getDriverOptimized(browserName));
             } else if (browserName.equalsIgnoreCase("MicrosoftEdge")) {
-                DriverManager.setDriver(DriverFactory.getDriver(browserName));
+                DriverManager.setDriver(DriverFactory.getDriverOptimized(browserName));
             } else {
                 throw new BrowserNotSpecifiedException("Browser not specified in excel data sheet file.");
             }
+
+//            if (browserName.equalsIgnoreCase("chrome")) {
+//                DriverManager.setDriver(DriverFactory.getDriver(browserName));
+//            } else if (browserName.equalsIgnoreCase("firefox")) {
+//                DriverManager.setDriver(DriverFactory.getDriver(browserName));
+//            } else if (browserName.equalsIgnoreCase("MicrosoftEdge")) {
+//                DriverManager.setDriver(DriverFactory.getDriver(browserName));
+//            } else {
+//                throw new BrowserNotSpecifiedException("Browser not specified in excel data sheet file.");
+//            }
 
             /* DriverManager.getDriver().get(JsonUtils.getValue(ConfigProperties.URL)); */
             DriverManager.getDriver().get(PropertyUtils.getValue(ConfigProperties.URL));

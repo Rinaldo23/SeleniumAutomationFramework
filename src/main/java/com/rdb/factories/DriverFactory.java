@@ -1,30 +1,50 @@
 package com.rdb.factories;
 
+import com.rdb.driver.ChromeBrowserDriver;
+import com.rdb.driver.EdgeBrowserDriver;
+import com.rdb.driver.FirefoxBrowserDriver;
+import com.rdb.driver.IBrowserDriver;
 import com.rdb.enums.ConfigProperties;
 import com.rdb.utils.PropertyUtils;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxDriverLogLevel;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.logging.Level;
 
 public final class DriverFactory {
 
     private DriverFactory() {
     }
 
-    public static WebDriver getDriver(String browserName) {
+    public static WebDriver getDriverOptimized(String browserName) {
+        IBrowserDriver driver;
+
+        String runmode = PropertyUtils.getValue(ConfigProperties.RUNMODE);
+
+        switch (browserName.toLowerCase()) {
+            case "chrome" -> driver = new ChromeBrowserDriver();
+            case "firefox" -> driver = new FirefoxBrowserDriver();
+            case "microsoftedge" -> driver = new EdgeBrowserDriver();
+            default -> throw new IllegalArgumentException("Invalid Browser Type : " + browserName);
+        }
+
+        driver.setEnableHeadlessExecution(Boolean.parseBoolean(PropertyUtils.getValue(ConfigProperties.ENABLEHEADLESSEXECUTION)));
+
+        driver.setRemoteExecution(runmode.equalsIgnoreCase("remote"));
+
+        if (runmode.equalsIgnoreCase("remote")) {
+            try {
+                return driver.getDriver(new URI("http://localhost:4444/wd/hub").toURL());
+            } catch (MalformedURLException | URISyntaxException e) {
+                throw new RuntimeException("Invalid remote URL", e);
+            }
+        } else {
+            return driver.getDriver();
+        }
+    }
+
+    /* public static WebDriver getDriver(String browserName) {
         WebDriver driver = null;
         String runmode = PropertyUtils.getValue(ConfigProperties.RUNMODE);
 
@@ -42,7 +62,7 @@ public final class DriverFactory {
                 System.out.println("Remote WebDriver Logic - Chrome!!");
                 chromeOptions.setCapability("browserName", browserName);
                 try {
-                    /* driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions); */
+                    // driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
                     driver = new RemoteWebDriver(new URI("http://localhost:4444/wd/hub").toURL(), chromeOptions);
                 } catch (MalformedURLException | URISyntaxException e) {
                     throw new RuntimeException(e);
@@ -66,7 +86,6 @@ public final class DriverFactory {
             if (runmode.equalsIgnoreCase("remote")) {
                 System.out.println("Remote WebDriver Logic - Firefox!!");
                 try {
-                    /* driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions); */
                     driver = new RemoteWebDriver(new URI("http://localhost:4444/wd/hub").toURL(), firefoxOptions);
                 } catch (MalformedURLException | URISyntaxException e) {
                     throw new RuntimeException(e);
@@ -84,7 +103,6 @@ public final class DriverFactory {
                 EdgeOptions edgeOptions = new EdgeOptions();
                 edgeOptions.setCapability("browserName", browserName);
                 try {
-                    /* driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions); */
                     driver = new RemoteWebDriver(new URI("http://localhost:4444/wd/hub").toURL(), edgeOptions);
                 } catch (MalformedURLException | URISyntaxException e) {
                     throw new RuntimeException(e);
@@ -98,5 +116,5 @@ public final class DriverFactory {
             }
         }
         return driver;
-    }
+    } */
 }
