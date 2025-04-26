@@ -4,13 +4,11 @@ import com.rdb.driver.browser.ChromeBrowserDriver;
 import com.rdb.driver.browser.EdgeBrowserDriver;
 import com.rdb.driver.browser.FirefoxBrowserDriver;
 import com.rdb.driver.browser.IBrowserDriver;
+import com.rdb.driver.mode.DriverProviderFactory;
+import com.rdb.driver.mode.IDriverProvider;
 import com.rdb.enums.ConfigProperties;
 import com.rdb.utils.PropertyUtils;
 import org.openqa.selenium.WebDriver;
-
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 public final class DriverFactory {
 
@@ -19,8 +17,7 @@ public final class DriverFactory {
 
     public static WebDriver getDriverOptimized(String browserName) {
         IBrowserDriver driver;
-
-        String runmode = PropertyUtils.getValue(ConfigProperties.RUNMODE);
+        IDriverProvider driverProvider;
 
         switch (browserName.toLowerCase()) {
             case "chrome" -> driver = new ChromeBrowserDriver();
@@ -31,17 +28,8 @@ public final class DriverFactory {
 
         driver.setEnableHeadlessExecution(Boolean.parseBoolean(PropertyUtils.getValue(ConfigProperties.ENABLEHEADLESSEXECUTION)));
 
-        driver.setRemoteExecution(runmode.equalsIgnoreCase("remote"));
-
-        if (driver.isRemoteExecution()) {
-            try {
-                return driver.getDriver(new URI("http://localhost:4444/wd/hub").toURL());
-            } catch (MalformedURLException | URISyntaxException e) {
-                throw new RuntimeException("Invalid remote URL", e);
-            }
-        } else {
-            return driver.getDriver();
-        }
+        driverProvider = DriverProviderFactory.getProvider();
+        return driverProvider.createDriver(driver);
     }
 
     /* public static WebDriver getDriver(String browserName) {
