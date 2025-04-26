@@ -1,4 +1,4 @@
-package com.rdb.driver;
+package com.rdb.driver.browser;
 
 public abstract class BrowserDriverBase implements IBrowserDriver {
 

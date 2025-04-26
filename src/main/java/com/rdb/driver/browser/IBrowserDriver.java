@@ -1,4 +1,4 @@
-package com.rdb.driver;
+package com.rdb.driver.browser;
 
 import org.openqa.selenium.WebDriver;
 

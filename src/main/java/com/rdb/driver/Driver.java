@@ -2,7 +2,6 @@ package com.rdb.driver;
 
 import com.rdb.enums.ConfigProperties;
 import com.rdb.exceptions.BrowserNotSpecifiedException;
-import com.rdb.factories.DriverFactory;
 import com.rdb.utils.PropertyUtils;
 
 import java.time.Duration;

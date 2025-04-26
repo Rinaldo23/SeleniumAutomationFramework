@@ -1,9 +1,9 @@
-package com.rdb.factories;
+package com.rdb.driver;
 
-import com.rdb.driver.ChromeBrowserDriver;
-import com.rdb.driver.EdgeBrowserDriver;
-import com.rdb.driver.FirefoxBrowserDriver;
-import com.rdb.driver.IBrowserDriver;
+import com.rdb.driver.browser.ChromeBrowserDriver;
+import com.rdb.driver.browser.EdgeBrowserDriver;
+import com.rdb.driver.browser.FirefoxBrowserDriver;
+import com.rdb.driver.browser.IBrowserDriver;
 import com.rdb.enums.ConfigProperties;
 import com.rdb.utils.PropertyUtils;
 import org.openqa.selenium.WebDriver;
@@ -33,7 +33,7 @@ public final class DriverFactory {
 
         driver.setRemoteExecution(runmode.equalsIgnoreCase("remote"));
 
-        if (runmode.equalsIgnoreCase("remote")) {
+        if (driver.isRemoteExecution()) {
             try {
                 return driver.getDriver(new URI("http://localhost:4444/wd/hub").toURL());
             } catch (MalformedURLException | URISyntaxException e) {
