@@ -10,10 +10,6 @@ public interface IBrowserDriver {
 
     void setEnableHeadlessExecution(boolean enableHeadlessExecution);
 
-    boolean isRemoteExecution();
-
-    void setRemoteExecution(boolean setRemoteExecutionMode);
-
     WebDriver getDriver();
 
     WebDriver getDriver(URL remoteAddress);

@@ -41,10 +41,6 @@ public class FirefoxBrowserDriver extends BrowserDriverBase {
             firefoxOptions.addArguments("--headless", "--disable-gpu", "--window-size=1280,800");
         }
 
-        if (isRemoteExecution()) {
-            firefoxOptions.setCapability("browserName", "firefox");
-        }
-
         return firefoxOptions;
     }
 

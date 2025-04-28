@@ -31,10 +31,6 @@ public class EdgeBrowserDriver extends BrowserDriverBase {
             edgeOptions.addArguments("--headless", "--disable-gpu", "--window-size=1280,800");
         }
 
-        if (isRemoteExecution()) {
-            edgeOptions.setCapability("browserName", "MicrosoftEdge");
-        }
-
         return edgeOptions;
     }
 }

@@ -35,10 +35,6 @@ public class ChromeBrowserDriver extends BrowserDriverBase {
             options.addArguments("--headless", "--disable-gpu", "--window-size=1280,800");
         }
 
-        if (isRemoteExecution()) {
-            options.setCapability("browserName", "chrome");
-        }
-
         return options;
     }
 }
