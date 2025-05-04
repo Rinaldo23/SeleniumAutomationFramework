@@ -1,7 +1,6 @@
 package com.rdb.pages;
 
-import com.rdb.enums.WaitStrategy;
-import com.rdb.pages.interactions.InteractionService;
+import com.rdb.pages.interactions.InteractionServiceImpl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -19,14 +18,41 @@ public final class HeaderPage extends BasePage {
     private final By listOfLangBtn = By.xpath("//div[@id='nav-flyout-icp']/child::div[contains(@class, 'itemList')]/a[contains(@lang,'-')]");
 
 
-    public HeaderPage(InteractionService interactions) {
+    /* public HeaderPage(InteractionService interactions) {
+        super(interactions);
+    } */
+
+    public HeaderPage(InteractionServiceImpl interactions) {
         super(interactions);
     }
 
     public HeaderPage searchForProduct(String productName) {
+        interactions.setTextBoxValue(searchTxtBox, "searchTxtBox", productName, 0);
+        interactions.click(searchBtn, "searchBtn", 10);
+        interactions.ensurePageIsFullyLoaded(20);
+        return this;
+    }
+
+    public HeaderPage selectLanguageAtRandom() {
+        interactions.mouseHover(languageDrpdwn, "languageDrpdwn", 10);
+        List<WebElement> langOptions = interactions.getListOfELements(listOfLangBtn, "listOfLangBtn", 10);
+        int randomNumber = ThreadLocalRandom.current().nextInt(1, langOptions.size());
+
+        for (int i = 1; i <= langOptions.size(); i++) {
+            if (i == randomNumber) {
+                WebElement dropDownEle = langOptions.get(i);
+                interactions.click((By) dropDownEle, "dropDownEle", 10);
+                break;
+            }
+        }
+        interactions.ensurePageIsFullyLoaded(20);
+        return this;
+    }
+
+    /* public HeaderPage searchForProduct(String productName) {
         interactions.setTextBoxValue(searchTxtBox, productName, WaitStrategy.CLICKABLE);
         interactions.click(searchBtn, "searchBtn", WaitStrategy.CLICKABLE);
-        /* Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(5)); */
+        Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(5));
         interactions.ensurePageIsFullyLoaded(20);
         return this;
     }
@@ -43,8 +69,8 @@ public final class HeaderPage extends BasePage {
                 break;
             }
         }
-        /* Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(5)); */
+        Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(5));
         interactions.ensurePageIsFullyLoaded(20);
         return this;
-    }
+    }*/
 }

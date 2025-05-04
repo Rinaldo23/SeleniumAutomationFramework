@@ -1,13 +1,19 @@
 package com.rdb.pages;
 
 import com.rdb.driver.DriverManager;
-import com.rdb.pages.interactions.InteractionService;
+import com.rdb.pages.interactions.InteractionServiceImpl;
 
 public class BasePage {
 
-    protected final InteractionService interactions;
+//    protected final InteractionService interactions;
+//
+//    protected BasePage(InteractionService interactions) {
+//        this.interactions = interactions;
+//    }
 
-    protected BasePage(InteractionService interactions) {
+    protected final InteractionServiceImpl interactions;
+
+    protected BasePage(InteractionServiceImpl interactions) {
         this.interactions = interactions;
     }
 

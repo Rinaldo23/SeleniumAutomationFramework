@@ -1,7 +1,6 @@
 package com.rdb.pages;
 
-import com.rdb.enums.WaitStrategy;
-import com.rdb.pages.interactions.InteractionService;
+import com.rdb.pages.interactions.InteractionServiceImpl;
 import org.openqa.selenium.By;
 
 public final class HomePage extends BasePage {
@@ -20,12 +19,26 @@ public final class HomePage extends BasePage {
 
     private final By btnHamburgerMenu = By.xpath("//a[@id='nav-hamburger-menu' and @role='button']");
 
-    public HomePage(InteractionService interactions) {
+    /* public HomePage(InteractionService interactions) {
         super(interactions);
-        /* PageFactory.initElements(DriverManager.getDriver(), this); */
+        PageFactory.initElements(DriverManager.getDriver(), this);
+    } */
+
+    public HomePage(InteractionServiceImpl interactions) {
+        super(interactions);
     }
 
     public boolean isAmazonHeaderLogoPresent() {
+        return interactions.checkIfElementsExistsInDOM(amazonLogo, "amazonLogo", 10);
+    }
+
+    public HomePage openAllCategoriesHamburgerMenu() {
+        interactions.click(btnHamburgerMenu, "All Categories Menu", 10);
+        interactions.waitForAjaxCalls(10);
+        return this;
+    }
+
+    /* public boolean isAmazonHeaderLogoPresent() {
         return interactions.isElementPresent(amazonLogo, WaitStrategy.VISIBLE);
     }
 
@@ -33,6 +46,6 @@ public final class HomePage extends BasePage {
         interactions.click(btnHamburgerMenu, "All Categories Menu", WaitStrategy.CLICKABLE);
         interactions.waitForAjaxCalls(10);
         return this;
-    }
+    } */
 }
 
