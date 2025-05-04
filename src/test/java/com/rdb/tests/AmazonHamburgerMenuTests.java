@@ -4,8 +4,6 @@ import com.rdb.annotations.FrameworkAnnotation;
 import com.rdb.dependencies.HamburgerMenuDependencies;
 import com.rdb.dependencies.IHamburgerMenuDependencies;
 import com.rdb.enums.CategoryType;
-import com.rdb.pages.HomePage;
-import com.rdb.pages.interactions.InteractionService;
 import org.testng.annotations.Test;
 
 import java.util.Map;
@@ -80,11 +78,15 @@ public final class AmazonHamburgerMenuTests extends BaseTest {
     @FrameworkAnnotation(authors = {"Rinaldo"}, categories = {CategoryType.SANITY})
     @Test
     public void verifyAmazonHomePageTitle(Map<String, String> data) {
-        String pageTitle = new HomePage(new InteractionService())
+        String pageTitleNew = dependencies.HomePage()
                 .openAllCategoriesHamburgerMenu()
                 .getPageTitle();
 
-        assertThat(pageTitle)
+        /* String pageTitle = new HomePage()
+                .openAllCategoriesHamburgerMenu()
+                .getPageTitle(); */
+
+        assertThat(pageTitleNew)
                 .isNotBlank()
                 .isNotEmpty()
                 .isNotNull();
